@@ -1,11 +1,11 @@
 package statement
 
 import (
-	"ast"
+	"github.com/LFYSec/Compiler/ast"
 )
 
 type Stmt struct {
-	Base 	ast.Node
+	Base ast.Node
 }
 
 func (stmt *Stmt) generateCode() {

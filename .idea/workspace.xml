@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef038bf5-983e-4789-bdaa-ff6f6f64d0ee" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammer.y" beforeDir="false" afterPath="$PROJECT_DIR$/grammer.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lex.go" beforeDir="false" afterPath="$PROJECT_DIR$/lex.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/expression/expression.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/expression.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/expression/rvalue/intLiteral/intLiteral.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/intLiteral/intLiteral.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ast/expression/rvalue/rvalue.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/rvalue.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ast/statement/statement.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/statement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tools/C/lex.yy.c" beforeDir="false" afterPath="$PROJECT_DIR$/lex.yy.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tools/C/lex.yy.h" beforeDir="false" afterPath="$PROJECT_DIR$/lex.yy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tools/C/token.h" beforeDir="false" afterPath="$PROJECT_DIR$/token.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/y.go" beforeDir="false" afterPath="$PROJECT_DIR$/y.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/y.output" beforeDir="false" afterPath="$PROJECT_DIR$/y.output" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,11 +27,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
-    <option name="urls">
-      <list>
-        <option value="file://$PROJECT_DIR$" />
-      </list>
-    </option>
+    <option name="useGoPathFromSystemEnvironment" value="false" />
   </component>
   <component name="ProjectId" id="1ZsU84M0Jh93jbwEPCkY4DG0GPV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -64,8 +52,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/tools" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/main" />
       <recent name="$PROJECT_DIR$/src/main/C" />
@@ -106,11 +94,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

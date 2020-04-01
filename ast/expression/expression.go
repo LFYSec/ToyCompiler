@@ -1,5 +1,5 @@
 package expression
 
-import "ast"
+import "github.com/LFYSec/Compiler/ast"
 
 type Expression ast.Node
