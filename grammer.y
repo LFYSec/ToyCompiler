@@ -15,7 +15,7 @@ type SymbolType int
 	int_value 	int
 	double_value 	float64
 	string_value 	string
-   	node 		*ASTNode;
+   	//node 		*Node;
    	symbolType 	SymbolType
 }
 

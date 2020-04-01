@@ -21,8 +21,8 @@ type yySymType struct {
 	int_value    int
 	double_value float64
 	string_value string
-	node         *ASTNode
-	symbolType   SymbolType
+	//node 		*Node;
+	symbolType SymbolType
 }
 
 const TYPE = 57346

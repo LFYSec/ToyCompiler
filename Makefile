@@ -6,7 +6,7 @@ run:
 	go run .
 
 flex:
-	flex --prefix=yy --header-file=lex.yy.h -o src/tools/C/lex.yy.c lex.l
+	flex --prefix=yy --header-file=lex.yy.h -o lex.yy.c lex.l
 
 goyacc:
 	goyacc grammer.y

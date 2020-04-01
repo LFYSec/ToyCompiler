@@ -1,8 +1,8 @@
 package main
 
 /*
-	#include "C/lex.yy.h"
-	#include "C/token.h"
+	#include "lex.yy.h"
+	#include "token.h"
 */
 import "C"
 

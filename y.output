@@ -20,7 +20,7 @@ state 1
 	statement  goto 2
 	assignStatement  goto 3
 	printStatement  goto 4
-	defineStatement  goto 5
+	declareStatement  goto 5
 
 state 2
 	program:  program statement.EOL 
@@ -42,7 +42,7 @@ state 4
 
 
 state 5
-	statement:  defineStatement.    (10)
+	statement:  declareStatement.    (10)
 
 	.  reduce 10 (src line 82)
 
@@ -63,8 +63,8 @@ state 7
 
 
 state 8
-	defineStatement:  TYPE.IDENTIFY 
-	defineStatement:  TYPE.IDENTIFY assign 
+	declareStatement:  TYPE.IDENTIFY 
+	declareStatement:  TYPE.IDENTIFY assign 
 
 	IDENTIFY  shift 13
 	.  error
@@ -119,8 +119,8 @@ state 12
 	unaryOperator  goto 18
 
 state 13
-	defineStatement:  TYPE IDENTIFY.    (4)
-	defineStatement:  TYPE IDENTIFY.assign 
+	declareStatement:  TYPE IDENTIFY.    (4)
+	declareStatement:  TYPE IDENTIFY.assign 
 
 	ASSIGN  shift 11
 	.  reduce 4 (src line 59)
@@ -226,7 +226,7 @@ state 26
 
 
 state 27
-	defineStatement:  TYPE IDENTIFY assign.    (5)
+	declareStatement:  TYPE IDENTIFY assign.    (5)
 
 	.  reduce 5 (src line 64)
 
