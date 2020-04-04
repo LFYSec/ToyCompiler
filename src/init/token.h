@@ -20,6 +20,8 @@ enum {
     GE,                      // >=
     LBRACKET,                // [
     RBRACKET,                // ]
+    LPARENTHESIS,            // (
+    RPARENTHESIS,            // )
     POINT,                   // .
     ASSIGN,
 

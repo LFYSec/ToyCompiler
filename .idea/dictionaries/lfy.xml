@@ -1,8 +1,20 @@
 <component name="ProjectDictionaryState">
   <dictionary name="lfy">
     <words>
+      <w>fadd</w>
+      <w>fcmp</w>
+      <w>fdif</w>
+      <w>fdiv</w>
+      <w>fmul</w>
+      <w>fsub</w>
+      <w>goyacc</w>
       <w>greatereq</w>
+      <w>icmp</w>
       <w>lesseq</w>
+      <w>lparenthesis</w>
+      <w>lvir</w>
+      <w>rparenthesis</w>
+      <w>rvir</w>
       <w>yylval</w>
       <w>yytext</w>
     </words>

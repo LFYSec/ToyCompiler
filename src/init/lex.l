@@ -31,6 +31,8 @@
 "/"                         {return DIV;}
 "["                         {return LBRACKET;}
 "]"                         {return RBRACKET;}
+"("                         {return LPARENTHESIS;}
+")"                         {return RPARENTHESIS;}
 "\n"                        {return EOL;}
 "="                         {return ASSIGN;}
 [ \t]                       {}

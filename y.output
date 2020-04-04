@@ -1,9 +1,9 @@
 
 state 0
 	$accept: .program $end 
-	program: .    (2)
+	program: .    (1)
 
-	.  reduce 2 (src line 49)
+	.  reduce 1 (src line 65)
 
 	program  goto 1
 
@@ -13,11 +13,12 @@ state 1
 
 	$end  accept
 	TYPE  shift 8
-	IDENTIFY  shift 6
+	IDENTIFY  shift 9
 	PRINT  shift 7
 	.  error
 
 	statement  goto 2
+	refExpression  goto 6
 	assignStatement  goto 3
 	printStatement  goto 4
 	declareStatement  goto 5
@@ -25,40 +26,40 @@ state 1
 state 2
 	program:  program statement.EOL 
 
-	EOL  shift 9
+	EOL  shift 10
 	.  error
 
 
 state 3
 	statement:  assignStatement.    (8)
 
-	.  reduce 8 (src line 79)
+	.  reduce 8 (src line 114)
 
 
 state 4
 	statement:  printStatement.    (9)
 
-	.  reduce 9 (src line 81)
+	.  reduce 9 (src line 116)
 
 
 state 5
 	statement:  declareStatement.    (10)
 
-	.  reduce 10 (src line 82)
+	.  reduce 10 (src line 117)
 
 
 state 6
-	assignStatement:  IDENTIFY.assign 
+	assignStatement:  refExpression.assign 
 
-	ASSIGN  shift 11
+	ASSIGN  shift 12
 	.  error
 
-	assign  goto 10
+	assign  goto 11
 
 state 7
-	printStatement:  PRINT.'(' expression ')' 
+	printStatement:  PRINT.LPARENTHESIS expression RPARENTHESIS 
 
-	'('  shift 12
+	LPARENTHESIS  shift 13
 	.  error
 
 
@@ -66,227 +67,238 @@ state 8
 	declareStatement:  TYPE.IDENTIFY 
 	declareStatement:  TYPE.IDENTIFY assign 
 
-	IDENTIFY  shift 13
+	IDENTIFY  shift 14
 	.  error
 
 
 state 9
-	program:  program statement EOL.    (1)
+	refExpression:  IDENTIFY.    (15)
 
-	.  reduce 1 (src line 47)
+	.  reduce 15 (src line 136)
 
 
 state 10
-	assignStatement:  IDENTIFY assign.    (6)
+	program:  program statement EOL.    (2)
 
-	.  reduce 6 (src line 69)
+	.  reduce 2 (src line 70)
 
 
 state 11
-	assign:  ASSIGN.expression 
+	assignStatement:  refExpression assign.    (6)
 
-	IDENTIFY  shift 21
-	INT_LITERAL  shift 19
-	DOUBLE_LITERAL  shift 20
-	ADD  shift 23
-	SUB  shift 24
-	NOT  shift 25
-	'('  shift 22
-	.  error
+	.  reduce 6 (src line 99)
 
-	expression  goto 14
-	atomExpression  goto 17
-	unaryExpression  goto 16
-	binaryOrAtomExpression  goto 15
-	unaryOperator  goto 18
 
 state 12
-	printStatement:  PRINT '('.expression ')' 
+	assign:  ASSIGN.expression 
 
-	IDENTIFY  shift 21
-	INT_LITERAL  shift 19
-	DOUBLE_LITERAL  shift 20
-	ADD  shift 23
-	SUB  shift 24
-	NOT  shift 25
-	'('  shift 22
+	IDENTIFY  shift 9
+	INT_LITERAL  shift 20
+	DOUBLE_LITERAL  shift 21
+	ADD  shift 24
+	SUB  shift 25
+	NOT  shift 26
+	LPARENTHESIS  shift 23
 	.  error
 
-	expression  goto 26
-	atomExpression  goto 17
-	unaryExpression  goto 16
-	binaryOrAtomExpression  goto 15
-	unaryOperator  goto 18
+	expression  goto 15
+	atomExpression  goto 18
+	unaryExpression  goto 17
+	binaryOrAtomExpression  goto 16
+	refExpression  goto 22
+	unaryOperator  goto 19
 
 state 13
+	printStatement:  PRINT LPARENTHESIS.expression RPARENTHESIS 
+
+	IDENTIFY  shift 9
+	INT_LITERAL  shift 20
+	DOUBLE_LITERAL  shift 21
+	ADD  shift 24
+	SUB  shift 25
+	NOT  shift 26
+	LPARENTHESIS  shift 23
+	.  error
+
+	expression  goto 27
+	atomExpression  goto 18
+	unaryExpression  goto 17
+	binaryOrAtomExpression  goto 16
+	refExpression  goto 22
+	unaryOperator  goto 19
+
+state 14
 	declareStatement:  TYPE IDENTIFY.    (4)
 	declareStatement:  TYPE IDENTIFY.assign 
 
-	ASSIGN  shift 11
-	.  reduce 4 (src line 59)
+	ASSIGN  shift 12
+	.  reduce 4 (src line 83)
 
-	assign  goto 27
-
-state 14
-	assign:  ASSIGN expression.    (3)
-
-	.  reduce 3 (src line 52)
-
+	assign  goto 28
 
 state 15
-	binaryOrAtomExpression:  binaryOrAtomExpression.'+' unaryExpression 
-	expression:  binaryOrAtomExpression.    (22)
+	assign:  ASSIGN expression.    (3)
 
-	'+'  shift 28
-	.  reduce 22 (src line 118)
+	.  reduce 3 (src line 77)
 
 
 state 16
-	binaryOrAtomExpression:  unaryExpression.    (20)
+	binaryOrAtomExpression:  binaryOrAtomExpression.ADD unaryExpression 
+	expression:  binaryOrAtomExpression.    (23)
 
-	.  reduce 20 (src line 113)
+	ADD  shift 29
+	.  reduce 23 (src line 162)
 
 
 state 17
-	unaryExpression:  atomExpression.    (18)
+	binaryOrAtomExpression:  unaryExpression.    (21)
 
-	.  reduce 18 (src line 108)
+	.  reduce 21 (src line 153)
 
 
 state 18
-	unaryExpression:  unaryOperator.atomExpression 
+	unaryExpression:  atomExpression.    (19)
 
-	IDENTIFY  shift 21
-	INT_LITERAL  shift 19
-	DOUBLE_LITERAL  shift 20
-	'('  shift 22
-	.  error
+	.  reduce 19 (src line 148)
 
-	atomExpression  goto 29
 
 state 19
-	atomExpression:  INT_LITERAL.    (11)
+	unaryExpression:  unaryOperator.atomExpression 
 
-	.  reduce 11 (src line 86)
+	IDENTIFY  shift 9
+	INT_LITERAL  shift 20
+	DOUBLE_LITERAL  shift 21
+	LPARENTHESIS  shift 23
+	.  error
 
+	atomExpression  goto 30
+	refExpression  goto 22
 
 state 20
-	atomExpression:  DOUBLE_LITERAL.    (12)
+	atomExpression:  INT_LITERAL.    (11)
 
-	.  reduce 12 (src line 91)
+	.  reduce 11 (src line 121)
 
 
 state 21
-	atomExpression:  IDENTIFY.    (13)
+	atomExpression:  DOUBLE_LITERAL.    (12)
 
-	.  reduce 13 (src line 95)
+	.  reduce 12 (src line 125)
 
 
 state 22
-	atomExpression:  '('.expression ')' 
+	atomExpression:  refExpression.    (13)
 
-	IDENTIFY  shift 21
-	INT_LITERAL  shift 19
-	DOUBLE_LITERAL  shift 20
-	ADD  shift 23
-	SUB  shift 24
-	NOT  shift 25
-	'('  shift 22
-	.  error
+	.  reduce 13 (src line 128)
 
-	expression  goto 30
-	atomExpression  goto 17
-	unaryExpression  goto 16
-	binaryOrAtomExpression  goto 15
-	unaryOperator  goto 18
 
 state 23
-	unaryOperator:  ADD.    (15)
+	atomExpression:  LPARENTHESIS.expression RPARENTHESIS 
 
-	.  reduce 15 (src line 102)
+	IDENTIFY  shift 9
+	INT_LITERAL  shift 20
+	DOUBLE_LITERAL  shift 21
+	ADD  shift 24
+	SUB  shift 25
+	NOT  shift 26
+	LPARENTHESIS  shift 23
+	.  error
 
+	expression  goto 31
+	atomExpression  goto 18
+	unaryExpression  goto 17
+	binaryOrAtomExpression  goto 16
+	refExpression  goto 22
+	unaryOperator  goto 19
 
 state 24
-	unaryOperator:  SUB.    (16)
+	unaryOperator:  ADD.    (16)
 
-	.  reduce 16 (src line 104)
+	.  reduce 16 (src line 142)
 
 
 state 25
-	unaryOperator:  NOT.    (17)
+	unaryOperator:  SUB.    (17)
 
-	.  reduce 17 (src line 105)
+	.  reduce 17 (src line 144)
 
 
 state 26
-	printStatement:  PRINT '(' expression.')' 
+	unaryOperator:  NOT.    (18)
 
-	')'  shift 31
-	.  error
+	.  reduce 18 (src line 145)
 
 
 state 27
-	declareStatement:  TYPE IDENTIFY assign.    (5)
+	printStatement:  PRINT LPARENTHESIS expression.RPARENTHESIS 
 
-	.  reduce 5 (src line 64)
+	RPARENTHESIS  shift 32
+	.  error
 
 
 state 28
-	binaryOrAtomExpression:  binaryOrAtomExpression '+'.unaryExpression 
+	declareStatement:  TYPE IDENTIFY assign.    (5)
 
-	IDENTIFY  shift 21
-	INT_LITERAL  shift 19
-	DOUBLE_LITERAL  shift 20
-	ADD  shift 23
-	SUB  shift 24
-	NOT  shift 25
-	'('  shift 22
-	.  error
+	.  reduce 5 (src line 89)
 
-	atomExpression  goto 17
-	unaryExpression  goto 32
-	unaryOperator  goto 18
 
 state 29
-	unaryExpression:  unaryOperator atomExpression.    (19)
+	binaryOrAtomExpression:  binaryOrAtomExpression ADD.unaryExpression 
 
-	.  reduce 19 (src line 110)
+	IDENTIFY  shift 9
+	INT_LITERAL  shift 20
+	DOUBLE_LITERAL  shift 21
+	ADD  shift 24
+	SUB  shift 25
+	NOT  shift 26
+	LPARENTHESIS  shift 23
+	.  error
 
+	atomExpression  goto 18
+	unaryExpression  goto 33
+	refExpression  goto 22
+	unaryOperator  goto 19
 
 state 30
-	atomExpression:  '(' expression.')' 
+	unaryExpression:  unaryOperator atomExpression.    (20)
 
-	')'  shift 33
-	.  error
+	.  reduce 20 (src line 150)
 
 
 state 31
-	printStatement:  PRINT '(' expression ')'.    (7)
+	atomExpression:  LPARENTHESIS expression.RPARENTHESIS 
 
-	.  reduce 7 (src line 75)
+	RPARENTHESIS  shift 34
+	.  error
 
 
 state 32
-	binaryOrAtomExpression:  binaryOrAtomExpression '+' unaryExpression.    (21)
+	printStatement:  PRINT LPARENTHESIS expression RPARENTHESIS.    (7)
 
-	.  reduce 21 (src line 115)
+	.  reduce 7 (src line 107)
 
 
 state 33
-	atomExpression:  '(' expression ')'.    (14)
+	binaryOrAtomExpression:  binaryOrAtomExpression ADD unaryExpression.    (22)
 
-	.  reduce 14 (src line 99)
+	.  reduce 22 (src line 155)
 
 
-35 terminals, 12 nonterminals
-23 grammar rules, 34/8000 states
+state 34
+	atomExpression:  LPARENTHESIS expression RPARENTHESIS.    (14)
+
+	.  reduce 14 (src line 131)
+
+
+35 terminals, 13 nonterminals
+24 grammar rules, 35/8000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
-61 working sets used
-memory: parser 33/120000
-0 extra closures
+62 working sets used
+memory: parser 45/120000
+1 extra closures
 43 shift entries, 1 exceptions
-16 goto entries
-10 entries saved by goto default
+18 goto entries
+14 entries saved by goto default
 Optimizer space used: output 40/120000
-40 table entries, 3 zero
+40 table entries, 1 zero
 maximum spread: 35, maximum offset: 35

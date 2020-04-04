@@ -1,4 +1,4 @@
-package main
+package init
 
 /*
 	#include "lex.yy.h"
@@ -113,6 +113,12 @@ func (l *lex) Lex(yylval *yySymType) int {
 	case C.RBRACKET:
 		yylval.string_value = l.yytext
 		return RBRACKET
+	case C.LPARENTHESIS:
+		yylval.string_value = l.yytext
+		return LPARENTHESIS
+	case C.RPARENTHESIS:
+		yylval.string_value = l.yytext
+		return RPARENTHESIS
 	case C.EOL:
 		return EOL
 	case C.ASSIGN:

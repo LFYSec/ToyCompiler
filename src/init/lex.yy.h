@@ -2,9 +2,9 @@
 #define yyHEADER_H 1
 #define yyIN_HEADER 1
 
-#line 6 "lex.yy.h"
+#line 6 "src/init/lex.yy.h"
 
-#line 8 "lex.yy.h"
+#line 8 "src/init/lex.yy.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -314,9 +314,9 @@ extern int yylex (void);
 #undef YY_DECL
 #endif
 
-#line 38 "lex.l"
+#line 40 "src/init/lex.l"
 
 
-#line 321 "lex.yy.h"
+#line 321 "src/init/lex.yy.h"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */

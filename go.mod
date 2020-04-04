@@ -1,3 +1,3 @@
-module github.com/LFYSec/Compiler
+module Compiler
 
 go 1.13
