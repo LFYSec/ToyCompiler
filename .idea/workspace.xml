@@ -2,37 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef038bf5-983e-4789-bdaa-ff6f6f64d0ee" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ast/expression/lvalue/variableReference/variableReference.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ast/statement/assign/assign.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ast/statement/compound/compound.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ast/statement/declare/declare.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ast/statement/print/print.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/global/const.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/init/init.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/init/test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/symbol/symbol.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/symbolTable.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/symbolTable/symbolType.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ast/statement/function/function.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ast/statement/while/while.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/lfy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/lfy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/expression/expression.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/expression.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/expression/rvalue/binOperateResult/binOperateResult.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/expression/rvalue/doubleLiteral/doubleLiteral.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/doubleLiteral/doubleLiteral.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/expression/rvalue/intLiteral/intLiteral.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/intLiteral/intLiteral.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/expression/rvalue/rvalue.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/rvalue.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/node.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/node.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/statement/statement.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/statement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammer.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/grammer.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lex.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lex.l" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.l" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lex.yy.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.yy.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lex.yy.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.yy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/token.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/y.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/y.output" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/global/const.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/grammer.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/grammer.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/lex.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/lex.l" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/lex.yy.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.yy.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/lex.yy.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.yy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/token.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/token.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/y.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/y.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbol/symbol.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbol/symbol.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbolTable.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbolTable.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbolType.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbolType.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.l" beforeDir="false" afterPath="$PROJECT_DIR$/test.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.ll" beforeDir="false" afterPath="$PROJECT_DIR$/test.ll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/y.output" beforeDir="false" afterPath="$PROJECT_DIR$/y.output" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,16 +134,6 @@
           <url>file://$PROJECT_DIR$/src/init/lex.go</url>
           <line>27</line>
           <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/ast/statement/compound/compound.go</url>
-          <line>17</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/symbolTable/symbol/symbol.go</url>
-          <line>24</line>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/ast/expression/lvalue/variableReference/variableReference.go</url>

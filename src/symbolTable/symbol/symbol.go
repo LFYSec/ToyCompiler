@@ -2,14 +2,19 @@ package symbol
 
 import (
 	"Compiler/src/global"
-	"os"
 )
 
 type Symbol struct {
-	Type 		global.SymbolType
-	Mutable 	bool
-	Name		string
-	NamespaceId	int64
+	Type 			global.SymbolType
+	Mutable 		bool
+	Name			string
+	NamespaceId		int64
+}
+
+type FuncSymbol struct {
+	Name 			string
+	ReturnType	 	global.SymbolType
+	ArgsType 		map[string]global.SymbolType
 }
 
 func TypeName(symbol *Symbol) string {
@@ -22,8 +27,7 @@ func TypeName(symbol *Symbol) string {
 		// TODO result := fmt.Sprintf("[%d x %s]",)
 		return "array"
 	default:
-		os.Exit(1)
-		return ""
+		panic("[*]Error: Unknown type")
 	}
 }
 
@@ -37,7 +41,7 @@ func CreateSymbol(mutable bool, t global.SymbolType, name string) *Symbol {
 		t = global.DOUBLE_LITERAL
 	}
 	result.Type = t
-	result.NamespaceId = 2^64 - 1
+	result.NamespaceId = 2^64 - 1  // TODO Q?
 	return &result
 }
 

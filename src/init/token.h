@@ -22,8 +22,11 @@ enum {
     RBRACKET,                // ]
     LPARENTHESIS,            // (
     RPARENTHESIS,            // )
+    LBRACE,                  // {
+    RBRACE,                  // }
     POINT,                   // .
-    ASSIGN,
+    ASSIGN,                  // =
+    COMMA,                   // ,
 
     ADD,
     SUB,
@@ -37,4 +40,5 @@ enum {
     DOUBLE,
     STRING,
     ARRAY,
+    VOID,
 };

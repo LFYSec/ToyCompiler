@@ -53,6 +53,9 @@ func (l *lex) Lex(yylval *yySymType) int {
 	case C.STRING:
 		yylval.symbolType = STRING
 		return TYPE
+	case C.VOID:
+		yylval.symbolType = VOID
+		return TYPE
 	case C.IF:
 		//fmt.Println("if")
 		return IF
@@ -119,6 +122,15 @@ func (l *lex) Lex(yylval *yySymType) int {
 	case C.RPARENTHESIS:
 		yylval.string_value = l.yytext
 		return RPARENTHESIS
+	case C.LBRACE:
+		yylval.string_value = l.yytext
+		return LBRACE
+	case C.RBRACE:
+		yylval.string_value = l.yytext
+		return RBRACE
+	case C.COMMA:
+		yylval.string_value = l.yytext
+		return COMMA
 	case C.EOL:
 		return EOL
 	case C.ASSIGN:

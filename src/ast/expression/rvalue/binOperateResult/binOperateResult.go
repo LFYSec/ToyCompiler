@@ -19,9 +19,6 @@ type BinOperateResult struct {
 }
 
 func (binOperateResult BinOperateResult) GeneRVCode() {
-	//x := intLiteral.CreateIntLiteral(1)
-	//CreateBinOperateResult(1, x, x) // TODO
-
 	binOperateResult.LHS.GeneRVCode()
 	binOperateResult.RHS.GeneRVCode()
 	irS := binOperateResult.RvalueIR()

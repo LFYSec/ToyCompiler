@@ -4,7 +4,7 @@ import (
 	"Compiler/src/symbolTable/symbol"
 )
 
-var GlobalSymbolTableStack = SymbolTableStack{0, nil}
+var GlobalSymbolTableStack = SymbolTableStack{0, nil, nil}
 var NextFrameId = 0
 
 type SymbolTableFrame struct {
@@ -15,6 +15,7 @@ type SymbolTableFrame struct {
 
 type SymbolTableStack struct {
 	Length 		int
+	Funcs		[]*symbol.FuncSymbol
 	Frames	 	[]*SymbolTableFrame
 }
 
@@ -41,7 +42,8 @@ func AddSymbol(s *symbol.Symbol) {
 }
 
 func GetSymbol(name string) *symbol.Symbol {
-	for _, f := range GlobalSymbolTableStack.Frames {
+	for i := GlobalSymbolTableStack.Length-1; i>=0 ;i-- {
+		f := GlobalSymbolTableStack.Frames[i] // 通过每一层block先push_frame实现作用域。栈结构，后push的优先级高
 		for _, s := range f.Symbols {
 			if s.Name == name {
 				return s
@@ -49,4 +51,8 @@ func GetSymbol(name string) *symbol.Symbol {
 		}
 	}
 	return nil
+}
+
+func AddFunc(f *symbol.FuncSymbol) {
+	_ = append(GlobalSymbolTableStack.Funcs, f)
 }

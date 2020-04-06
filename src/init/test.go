@@ -20,7 +20,7 @@ package init
 //
 //var result *compound.CompoundStmt
 //
-//func test()  {
+//function test()  {
 //	//var nodes ast.Node
 //	var nodes stmt.Stmt
 //	nodes = compound.CreateCompoundStmt()
@@ -40,7 +40,7 @@ package init
 //	binOperateResult.CreateBinOperateResult(1, )
 //}
 //
-//func test() {
+//function test() {
 //	var s *stmt.Stmt
 //	v := s.(ast.Node)
 //
@@ -50,4 +50,9 @@ package init
 
 func test() {
 	//declare.CreateDeclareStmt(s, assign.AssignStmt{})
+	//symbolTable.PushFrame()
+	//declare.DeclareStmt{}
+	//function.CreateFuncDefine(1,"1", nil, nil)
+	//var v5 interface{}
+	//v5 = 1
 }

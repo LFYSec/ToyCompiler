@@ -3,6 +3,7 @@
 package init
 
 import (
+	//"fmt"
 	"Compiler/src/ast/statement/compound"
 	"Compiler/src/ast"
 	"Compiler/src/ast/expression/rvalue/binOperateResult"
@@ -17,11 +18,14 @@ import (
 	"Compiler/src/ast/expression/rvalue/doubleLiteral"
 	"Compiler/src/ast/expression/rvalue/intLiteral"
 	"Compiler/src/ast/statement/assign"
+	"Compiler/src/ast/statement/function"
 	"Compiler/src/symbolTable"
 	"Compiler/src/symbolTable/symbol"
 	"Compiler/src/ast/expression/lvalue"
 	"Compiler/src/ast/expression/rvalue"
 	stmt "Compiler/src/ast/statement"
+	"Compiler/src/ast/statement/while"
+	"Compiler/src/symbolTable"
 )
 
 var result *compound.CompoundStmt
@@ -42,21 +46,21 @@ var result *compound.CompoundStmt
 %token <double_value> 	DOUBLE_LITERAL
 %token ARRAY
 
-%token <string_value> STRING INT DOUBLE CHAR BOOL
+%token <string_value> STRING INT DOUBLE CHAR BOOL VOID
 
 %token IF ELSE WHILE FOR PRINT EOL
 
-%token <string_value> EQ NE LT LE GT GE ASSIGN
+%token <string_value> EQ NE LT LE GT GE ASSIGN COMMA
 %token <string_value> ADD SUB MUL DIV NOT
-%token <string_value> LBRACKET RBRACKET LPARENTHESIS RPARENTHESIS
+%token <string_value> LBRACKET RBRACKET LPARENTHESIS RPARENTHESIS LBRACE RBRACE
 
 %left EQ NE LT LE GT GE
 %left ADD SUB
 %left MUL DIV
 
-%type <node> expression statement program assign
+%type <node> expression statement program assign block stmtList funcDefine args
 %type <node> atomExpression unaryExpression binaryOrAtomExpression refExpression
-%type <node> assignStatement printStatement declareStatement
+%type <node> assignStatement printStatement declareStatement whileStatement
 //%type <string_value> unaryOperator
 
 
@@ -67,21 +71,21 @@ program
 		result = compound.CreateCompoundStmt()
 		$$ = result
 	}
-    	| program statement EOL	{
+    	| program statement EOL{
     		v1 := ($1).(*compound.CompoundStmt)
     		v2 := ($2).(stmt.Stmt)
 		compound.AddStmt(v1, v2)
     	}
 	;
 
-assign:
-    	ASSIGN expression {
+assign
+	: ASSIGN expression {
     		$$=$2
     	}
     	;
 
-declareStatement:
-    	TYPE IDENTIFY {
+declareStatement
+	: TYPE IDENTIFY {
 		s := symbol.CreateSymbol(true, $1, $2)
 		symbolTable.AddSymbol(s)
 		$$ = declare.CreateDeclareStmt(s, assign.AssignStmt{})
@@ -96,30 +100,44 @@ declareStatement:
         }
     	;
 
-assignStatement:
-    	refExpression assign {
+assignStatement
+	: refExpression assign {
     		v1 := ($1).(lvalue.LValue)
     		v2 := ($2).(rvalue.RValue)
 		$$ = assign.CreateAssignStmt(v1, v2)
     	}
     	;
 
-printStatement:
-    	PRINT LPARENTHESIS expression RPARENTHESIS {
-    		v3 := ($3).(rvalue.RValue)
-    		$$ = print.CreatePrintStmt(v3)
+printStatement
+	: PRINT LPARENTHESIS expression RPARENTHESIS {
+		v3 := ($3).(rvalue.RValue)
+		$$ = print.CreatePrintStmt(v3)
     	}
 	;
 
-statement:
-	assignStatement
+whileStatement
+	: WHILE expression block {
+		symbolTable.PushFrame()
+		v2 := ($2).(rvalue.RValue)
+		v3 := ($3).(*compound.CompoundStmt)
+		$$ = while.CreateWhileStmt(v2, v3)
+		symbolTable.PopFrame()
+	}
+
+//returnStatement TODO
+
+statement
+	: assignStatement
 	| printStatement
 	| declareStatement
+	| block
+	| whileStatement
+	| funcDefine
 	;
 
 
-atomExpression:
-    	INT_LITERAL {
+atomExpression
+	: INT_LITERAL {
 		$$ = intLiteral.CreateIntLiteral($1)
     	}
     	| DOUBLE_LITERAL {
@@ -133,9 +151,12 @@ atomExpression:
     	}
     	;
 
-refExpression:
-	IDENTIFY {
+refExpression
+	: IDENTIFY {
 		sb := symbolTable.GetSymbol($1)
+		if sb == nil{
+			panic("[*] Error: Undefined var")
+		}
                 $$ = variableReference.CreateVariableReference(sb)
 	}
 
@@ -157,6 +178,11 @@ binaryOrAtomExpression
     		v3 := ($3).(rvalue.RValue)
     		$$ = binOperateResult.CreateBinOperateResult(ADD, v1, v3)
     	}
+    	| binaryOrAtomExpression EQ unaryExpression {
+		v1 := ($1).(rvalue.RValue)
+		v3 := ($3).(rvalue.RValue)
+		$$ = binOperateResult.CreateBinOperateResult(EQ, v1, v3)
+	}
     	;
 
 expression
@@ -165,5 +191,70 @@ expression
 	}
 	;
 
+block
+	: LBRACE RBRACE {
+		//fmt.Println("None stmts func")
+		$$ = nil
+	}
+	| LBRACE stmtList RBRACE {
+		$$=$2
+	}
+
+stmtList
+	: stmtList statement {
+		v1 := ($1).(*compound.CompoundStmt)
+		v2 := ($2).(stmt.Stmt)
+		compound.AddStmt(v1, v2)
+	}
+	| {
+		$$ = compound.CreateCompoundStmt()
+	}
+
+//funcCallStmt
+//	:
+
+// args处返回CreateDeclareStmt切片，block处返回函数的CompoundStmt
+funcDefine
+	: TYPE IDENTIFY LPARENTHESIS {symbolTable.PushFrame()} args RPARENTHESIS block {
+		//CreateFunc()
+		v1 := $1				 // function return type
+		/*
+			function name, add to symbolTable
+                	(作用域？全局符号表第几级？)
+                	update：目前仍全局符号栈里了
+                */
+		v2 := ($2)
+		if ($7) == nil {
+			$$ = function.CreateFuncDefine(v1, v2, nil, nil)
+		} else {
+			v7 := ($7).(*compound.CompoundStmt)	 // function stmts
+			if ($5) != nil{
+				v5 := ($5).([]*declare.DeclareStmt) // function args
+				$$ = function.CreateFuncDefine(v1, v2, v5, v7)
+			} else {
+				$$ = function.CreateFuncDefine(v1, v2, nil, v7)
+			}
+		}
+		symbolTable.PopFrame()
+	}
+	;
+
+args
+	: {
+		//fmt.Println("None args func")
+		$$ = nil
+	}
+	| declareStatement {
+		//fmt.Println("args branch")
+		var declareStmts []*declare.DeclareStmt
+		v1 := ($1).(declare.DeclareStmt)
+		$$ = append(declareStmts, &v1)
+	}
+	| args COMMA declareStatement {
+		v1 := ($1).([]*declare.DeclareStmt)
+		v3 := ($3).(declare.DeclareStmt)
+		$$ = append(v1, &v3)
+		//fmt.Println("Another args")
+	}
 
 %%

@@ -7,6 +7,7 @@
 
 %%
 
+"void"                      {return VOID;}
 "char"                      {return CHAR;}
 "bool"                      {return BOOL;}
 "int"                       {return INT;}
@@ -33,8 +34,11 @@
 "]"                         {return RBRACKET;}
 "("                         {return LPARENTHESIS;}
 ")"                         {return RPARENTHESIS;}
+"{"                         {return LBRACE;}
+"}"                         {return RBRACE;}
 "\n"                        {return EOL;}
 "="                         {return ASSIGN;}
 [ \t]                       {}
 "!"                         {return NOT;}
+","                         {return COMMA;}
 %%
