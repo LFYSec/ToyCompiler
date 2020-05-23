@@ -5,12 +5,14 @@ enum {
     INT_LITERAL,
     DOUBLE_LITERAL,
     EOL,
+    EOS,
 
     IF,
     ELSE,
     WHILE,
     FOR,
     PRINT,
+    RETURN,
 
     EQ,                      // ==
     NE,                      // !=

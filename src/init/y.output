@@ -1,0 +1,544 @@
+
+state 0
+	$accept: .program $end 
+	program: .    (1)
+
+	.  reduce 1 (src line 70)
+
+	program  goto 1
+
+state 1
+	$accept:  program.$end 
+	program:  program.statement 
+
+	$end  accept
+	TYPE  shift 13
+	IDENTIFY  shift 16
+	WHILE  shift 15
+	PRINT  shift 12
+	RETURN  shift 10
+	LBRACE  shift 14
+	.  error
+
+	statement  goto 2
+	block  goto 7
+	funcDefine  goto 9
+	refExpression  goto 11
+	assignStatement  goto 4
+	printStatement  goto 5
+	declareStatement  goto 6
+	whileStatement  goto 8
+	returnStatement  goto 3
+
+state 2
+	program:  program statement.    (2)
+
+	.  reduce 2 (src line 75)
+
+
+state 3
+	statement:  returnStatement.    (10)
+
+	.  reduce 10 (src line 136)
+
+
+state 4
+	statement:  assignStatement.    (11)
+
+	.  reduce 11 (src line 138)
+
+
+state 5
+	statement:  printStatement.    (12)
+
+	.  reduce 12 (src line 139)
+
+
+state 6
+	statement:  declareStatement.    (13)
+
+	.  reduce 13 (src line 140)
+
+
+state 7
+	statement:  block.    (14)
+
+	.  reduce 14 (src line 141)
+
+
+state 8
+	statement:  whileStatement.    (15)
+
+	.  reduce 15 (src line 142)
+
+
+state 9
+	statement:  funcDefine.    (16)
+
+	.  reduce 16 (src line 143)
+
+
+state 10
+	returnStatement:  RETURN.expression 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	ADD  shift 26
+	SUB  shift 27
+	NOT  shift 28
+	LPARENTHESIS  shift 25
+	.  error
+
+	expression  goto 17
+	atomExpression  goto 20
+	unaryExpression  goto 19
+	binaryOrAtomExpression  goto 18
+	refExpression  goto 24
+	unaryOperator  goto 21
+
+state 11
+	assignStatement:  refExpression.assign 
+
+	ASSIGN  shift 30
+	.  error
+
+	assign  goto 29
+
+state 12
+	printStatement:  PRINT.LPARENTHESIS expression RPARENTHESIS 
+
+	LPARENTHESIS  shift 31
+	.  error
+
+
+state 13
+	declareStatement:  TYPE.IDENTIFY 
+	declareStatement:  TYPE.IDENTIFY assign 
+	funcDefine:  TYPE.IDENTIFY LPARENTHESIS $$35 args RPARENTHESIS block 
+
+	IDENTIFY  shift 32
+	.  error
+
+
+14: shift/reduce conflict (shift 33(0), red'n 34(0)) on RBRACE
+state 14
+	block:  LBRACE.RBRACE 
+	block:  LBRACE.stmtList RBRACE 
+	stmtList: .    (34)
+
+	RBRACE  shift 33
+	.  reduce 34 (src line 217)
+
+	stmtList  goto 34
+
+state 15
+	whileStatement:  WHILE.expression block 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	ADD  shift 26
+	SUB  shift 27
+	NOT  shift 28
+	LPARENTHESIS  shift 25
+	.  error
+
+	expression  goto 35
+	atomExpression  goto 20
+	unaryExpression  goto 19
+	binaryOrAtomExpression  goto 18
+	refExpression  goto 24
+	unaryOperator  goto 21
+
+state 16
+	refExpression:  IDENTIFY.    (21)
+
+	.  reduce 21 (src line 162)
+
+
+state 17
+	returnStatement:  RETURN expression.    (9)
+
+	.  reduce 9 (src line 129)
+
+
+state 18
+	binaryOrAtomExpression:  binaryOrAtomExpression.ADD unaryExpression 
+	binaryOrAtomExpression:  binaryOrAtomExpression.EQ unaryExpression 
+	expression:  binaryOrAtomExpression.    (30)
+
+	EQ  shift 37
+	ADD  shift 36
+	.  reduce 30 (src line 196)
+
+
+state 19
+	binaryOrAtomExpression:  unaryExpression.    (27)
+
+	.  reduce 27 (src line 182)
+
+
+state 20
+	unaryExpression:  atomExpression.    (25)
+
+	.  reduce 25 (src line 177)
+
+
+state 21
+	unaryExpression:  unaryOperator.atomExpression 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	LPARENTHESIS  shift 25
+	.  error
+
+	atomExpression  goto 38
+	refExpression  goto 24
+
+state 22
+	atomExpression:  INT_LITERAL.    (17)
+
+	.  reduce 17 (src line 147)
+
+
+state 23
+	atomExpression:  DOUBLE_LITERAL.    (18)
+
+	.  reduce 18 (src line 151)
+
+
+state 24
+	atomExpression:  refExpression.    (19)
+
+	.  reduce 19 (src line 154)
+
+
+state 25
+	atomExpression:  LPARENTHESIS.expression RPARENTHESIS 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	ADD  shift 26
+	SUB  shift 27
+	NOT  shift 28
+	LPARENTHESIS  shift 25
+	.  error
+
+	expression  goto 39
+	atomExpression  goto 20
+	unaryExpression  goto 19
+	binaryOrAtomExpression  goto 18
+	refExpression  goto 24
+	unaryOperator  goto 21
+
+state 26
+	unaryOperator:  ADD.    (22)
+
+	.  reduce 22 (src line 171)
+
+
+state 27
+	unaryOperator:  SUB.    (23)
+
+	.  reduce 23 (src line 173)
+
+
+state 28
+	unaryOperator:  NOT.    (24)
+
+	.  reduce 24 (src line 174)
+
+
+state 29
+	assignStatement:  refExpression assign.    (6)
+
+	.  reduce 6 (src line 104)
+
+
+state 30
+	assign:  ASSIGN.expression 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	ADD  shift 26
+	SUB  shift 27
+	NOT  shift 28
+	LPARENTHESIS  shift 25
+	.  error
+
+	expression  goto 40
+	atomExpression  goto 20
+	unaryExpression  goto 19
+	binaryOrAtomExpression  goto 18
+	refExpression  goto 24
+	unaryOperator  goto 21
+
+state 31
+	printStatement:  PRINT LPARENTHESIS.expression RPARENTHESIS 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	ADD  shift 26
+	SUB  shift 27
+	NOT  shift 28
+	LPARENTHESIS  shift 25
+	.  error
+
+	expression  goto 41
+	atomExpression  goto 20
+	unaryExpression  goto 19
+	binaryOrAtomExpression  goto 18
+	refExpression  goto 24
+	unaryOperator  goto 21
+
+state 32
+	declareStatement:  TYPE IDENTIFY.    (4)
+	declareStatement:  TYPE IDENTIFY.assign 
+	funcDefine:  TYPE IDENTIFY.LPARENTHESIS $$35 args RPARENTHESIS block 
+
+	ASSIGN  shift 30
+	LPARENTHESIS  shift 43
+	.  reduce 4 (src line 88)
+
+	assign  goto 42
+
+state 33
+	block:  LBRACE RBRACE.    (31)
+
+	.  reduce 31 (src line 202)
+
+
+state 34
+	block:  LBRACE stmtList.RBRACE 
+	stmtList:  stmtList.statement 
+
+	TYPE  shift 13
+	IDENTIFY  shift 16
+	WHILE  shift 15
+	PRINT  shift 12
+	RETURN  shift 10
+	LBRACE  shift 14
+	RBRACE  shift 44
+	.  error
+
+	statement  goto 45
+	block  goto 7
+	funcDefine  goto 9
+	refExpression  goto 11
+	assignStatement  goto 4
+	printStatement  goto 5
+	declareStatement  goto 6
+	whileStatement  goto 8
+	returnStatement  goto 3
+
+state 35
+	whileStatement:  WHILE expression.block 
+
+	LBRACE  shift 14
+	.  error
+
+	block  goto 46
+
+state 36
+	binaryOrAtomExpression:  binaryOrAtomExpression ADD.unaryExpression 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	ADD  shift 26
+	SUB  shift 27
+	NOT  shift 28
+	LPARENTHESIS  shift 25
+	.  error
+
+	atomExpression  goto 20
+	unaryExpression  goto 47
+	refExpression  goto 24
+	unaryOperator  goto 21
+
+state 37
+	binaryOrAtomExpression:  binaryOrAtomExpression EQ.unaryExpression 
+
+	IDENTIFY  shift 16
+	INT_LITERAL  shift 22
+	DOUBLE_LITERAL  shift 23
+	ADD  shift 26
+	SUB  shift 27
+	NOT  shift 28
+	LPARENTHESIS  shift 25
+	.  error
+
+	atomExpression  goto 20
+	unaryExpression  goto 48
+	refExpression  goto 24
+	unaryOperator  goto 21
+
+state 38
+	unaryExpression:  unaryOperator atomExpression.    (26)
+
+	.  reduce 26 (src line 179)
+
+
+state 39
+	atomExpression:  LPARENTHESIS expression.RPARENTHESIS 
+
+	RPARENTHESIS  shift 49
+	.  error
+
+
+state 40
+	assign:  ASSIGN expression.    (3)
+
+	.  reduce 3 (src line 82)
+
+
+state 41
+	printStatement:  PRINT LPARENTHESIS expression.RPARENTHESIS 
+
+	RPARENTHESIS  shift 50
+	.  error
+
+
+state 42
+	declareStatement:  TYPE IDENTIFY assign.    (5)
+
+	.  reduce 5 (src line 94)
+
+
+state 43
+	funcDefine:  TYPE IDENTIFY LPARENTHESIS.$$35 args RPARENTHESIS block 
+	$$35: .    (35)
+
+	.  reduce 35 (src line 225)
+
+	$$35  goto 51
+
+state 44
+	block:  LBRACE stmtList RBRACE.    (32)
+
+	.  reduce 32 (src line 207)
+
+
+state 45
+	stmtList:  stmtList statement.    (33)
+
+	.  reduce 33 (src line 211)
+
+
+state 46
+	whileStatement:  WHILE expression block.    (8)
+
+	.  reduce 8 (src line 119)
+
+
+state 47
+	binaryOrAtomExpression:  binaryOrAtomExpression ADD unaryExpression.    (28)
+
+	.  reduce 28 (src line 184)
+
+
+state 48
+	binaryOrAtomExpression:  binaryOrAtomExpression EQ unaryExpression.    (29)
+
+	.  reduce 29 (src line 189)
+
+
+state 49
+	atomExpression:  LPARENTHESIS expression RPARENTHESIS.    (20)
+
+	.  reduce 20 (src line 157)
+
+
+state 50
+	printStatement:  PRINT LPARENTHESIS expression RPARENTHESIS.    (7)
+
+	.  reduce 7 (src line 112)
+
+
+state 51
+	funcDefine:  TYPE IDENTIFY LPARENTHESIS $$35.args RPARENTHESIS block 
+	args: .    (37)
+
+	TYPE  shift 54
+	.  reduce 37 (src line 250)
+
+	args  goto 52
+	declareStatement  goto 53
+
+state 52
+	funcDefine:  TYPE IDENTIFY LPARENTHESIS $$35 args.RPARENTHESIS block 
+	args:  args.COMMA declareStatement 
+
+	COMMA  shift 56
+	RPARENTHESIS  shift 55
+	.  error
+
+
+state 53
+	args:  declareStatement.    (38)
+
+	.  reduce 38 (src line 255)
+
+
+state 54
+	declareStatement:  TYPE.IDENTIFY 
+	declareStatement:  TYPE.IDENTIFY assign 
+
+	IDENTIFY  shift 57
+	.  error
+
+
+state 55
+	funcDefine:  TYPE IDENTIFY LPARENTHESIS $$35 args RPARENTHESIS.block 
+
+	LBRACE  shift 14
+	.  error
+
+	block  goto 58
+
+state 56
+	args:  args COMMA.declareStatement 
+
+	TYPE  shift 54
+	.  error
+
+	declareStatement  goto 59
+
+state 57
+	declareStatement:  TYPE IDENTIFY.    (4)
+	declareStatement:  TYPE IDENTIFY.assign 
+
+	ASSIGN  shift 30
+	.  reduce 4 (src line 88)
+
+	assign  goto 42
+
+state 58
+	funcDefine:  TYPE IDENTIFY LPARENTHESIS $$35 args RPARENTHESIS block.    (36)
+
+	.  reduce 36 (src line 226)
+
+
+state 59
+	args:  args COMMA declareStatement.    (39)
+
+	.  reduce 39 (src line 261)
+
+
+40 terminals, 20 nonterminals
+40 grammar rules, 60/8000 states
+1 shift/reduce, 0 reduce/reduce conflicts reported
+69 working sets used
+memory: parser 85/120000
+64 extra closures
+84 shift entries, 1 exceptions
+34 goto entries
+35 entries saved by goto default
+Optimizer space used: output 73/120000
+73 table entries, 0 zero
+maximum spread: 40, maximum offset: 56

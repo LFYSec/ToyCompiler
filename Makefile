@@ -3,7 +3,7 @@ run:
 	make goyacc
 
 	@go fmt
-	go run .
+	go build . && ./Compiler
 
 flex:
 	flex --prefix=yy --header-file=src/init/lex.yy.h -o src/init/lex.yy.c src/init/lex.l

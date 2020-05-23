@@ -18,42 +18,42 @@ type BinOperateResult struct {
 	RHS        	rvalue.RValue
 }
 
-func (binOperateResult BinOperateResult) GeneRVCode() {
-	binOperateResult.LHS.GeneRVCode()
-	binOperateResult.RHS.GeneRVCode()
-	irS := binOperateResult.RvalueIR()
+func (b BinOperateResult) GeneRVCode() {
+	b.LHS.GeneRVCode()
+	b.RHS.GeneRVCode()
+	irS := b.RvalueIR()
 	fmt.Print(irS, " = ")
-	switch binOperateResult.OperatorId {
+	switch b.OperatorId {
 	case global.ADD:
-		if binOperateResult.Type == global.DOUBLE_LITERAL {
+		if b.Type == global.DOUBLE_LITERAL {
 			fmt.Print("fadd")
 		} else {
 			fmt.Print("add nsw")
 		}
 		break
 	case global.SUB:
-		if binOperateResult.Type == global.DOUBLE_LITERAL {
+		if b.Type == global.DOUBLE_LITERAL {
 			fmt.Print("fsub")
 		} else {
 			fmt.Print("sub nsw")
 		}
 		break
 	case global.MUL:
-		if binOperateResult.Type == global.DOUBLE_LITERAL {
+		if b.Type == global.DOUBLE_LITERAL {
 			fmt.Print("fmul")
 		} else {
 			fmt.Print("mul nsw")
 		}
 		break
 	case global.DIV:
-		if binOperateResult.Type == global.DOUBLE_LITERAL {
+		if b.Type == global.DOUBLE_LITERAL {
 			fmt.Print("fdif")
 		} else {
 			fmt.Print("dif nsw")
 		}
 		break
 	case global.GT:
-		switch binOperateResult.LHS.GetType() {
+		switch b.LHS.GetType() {
 		case global.INT_LITERAL:
 			fmt.Print("icmp sgt")
 			break
@@ -64,7 +64,7 @@ func (binOperateResult BinOperateResult) GeneRVCode() {
 			break
 		}
 	case global.LT:
-		switch binOperateResult.LHS.GetType() {
+		switch b.LHS.GetType() {
 		case global.INT_LITERAL:
 			fmt.Print("icmp slt")
 			break
@@ -75,7 +75,7 @@ func (binOperateResult BinOperateResult) GeneRVCode() {
 			break
 		}
 	case global.LE:
-		switch binOperateResult.LHS.GetType() {
+		switch b.LHS.GetType() {
 		case global.INT_LITERAL:
 			fmt.Print("icmp sle")
 			break
@@ -86,7 +86,7 @@ func (binOperateResult BinOperateResult) GeneRVCode() {
 			break
 		}
 	case global.GE:
-		switch binOperateResult.LHS.GetType() {
+		switch b.LHS.GetType() {
 		case global.INT_LITERAL:
 			fmt.Print("icmp sge")
 			break
@@ -97,7 +97,7 @@ func (binOperateResult BinOperateResult) GeneRVCode() {
 			break
 		}
 	case global.EQ:
-		switch binOperateResult.LHS.GetType() {
+		switch b.LHS.GetType() {
 		case global.INT_LITERAL:
 			fmt.Print("icmp eq")
 			break
@@ -108,9 +108,9 @@ func (binOperateResult BinOperateResult) GeneRVCode() {
 			break
 		}
 	case global.NE:
-		switch binOperateResult.LHS.GetType() {
+		switch b.LHS.GetType() {
 		case global.INT_LITERAL:
-			fmt.Print("icmp.ne")
+			fmt.Print("icmp ne")
 			break
 		case global.DOUBLE_LITERAL:
 			fmt.Print("fcmp one")
@@ -121,17 +121,17 @@ func (binOperateResult BinOperateResult) GeneRVCode() {
 	default:
 		os.Exit(1)
 	}
-	fmt.Printf(" %s ", symbolTable.TypeString(binOperateResult.Type))
-	fmt.Printf("%s, %s\n", binOperateResult.LHS.RvalueIR(), binOperateResult.RHS.RvalueIR())
+	fmt.Printf(" %s ", symbolTable.TypeString(b.Type))
+	fmt.Printf("%s, %s\n", b.LHS.RvalueIR(), b.RHS.RvalueIR())
 }
 
-func (binOperateResult BinOperateResult) RvalueIR() string {
-	result := fmt.Sprintf("%%temp_%d", binOperateResult.TmpRegId)
+func (b BinOperateResult) RvalueIR() string {
+	result := fmt.Sprintf("%%temp_%d", b.TmpRegId)
 	return result
 }
 
-func (binOperateResult BinOperateResult) GetType() global.SymbolType {
-	return binOperateResult.Type
+func (b BinOperateResult) GetType() global.SymbolType {
+	return b.Type
 }
 
 
@@ -140,15 +140,16 @@ func CreateBinOperateResult(OperateId int, LHS,RHS rvalue.RValue) BinOperateResu
 	if LHS.GetType() != RHS.GetType() {
 		os.Exit(1)
 	}
-	switch OperateId {
-	case global.GT:
-	case global.LT:
-		result.Type = global.BOOL
-		break
-	default:
-		result.Type = LHS.GetType()
-		break
-	}
+	//switch OperateId {
+	//case global.GT:
+	//case global.LT:
+	//	result.Type = global.BOOL
+	//	break
+	//default:
+	//	result.Type = LHS.GetType()
+	//	break
+	//}
+	result.Type = LHS.GetType()
 	result.OperatorId = OperateId
 	result.LHS = LHS
 	result.RHS = RHS

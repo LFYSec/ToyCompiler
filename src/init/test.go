@@ -3,7 +3,7 @@ package init
 //
 //import (
 //	"Compiler/src/ast"
-//	"Compiler/src/ast/expression/lvalue/variableReference"
+//	"Compiler/src/ast/expression/lvalue/reference"
 //	"Compiler/src/ast/expression/rvalue/binOperateResult"
 //	"Compiler/src/ast/expression/rvalue/doubleLiteral"
 //	"Compiler/src/ast/expression/rvalue/intLiteral"
@@ -28,11 +28,11 @@ package init
 //	compound.AddStmt(result, $2)
 //	s := symbol.CreateSymbol(true, 1,"2")
 //	symbolTable.AddSymbol(s)
-//	ref := variableReference.CreateVariableReference(s)
+//	ref := reference.CreateVariableReference(s)
 //	assign.CreateAssignStmt(ref, 1)
 //
-//	sb := symbolTable.GetSymbol("1")
-//	ref := variableReference.CreateVariableReference(sb)
+//	sb := symbolTable.GetVarSymbol("1")
+//	ref := reference.CreateVariableReference(sb)
 //	assign.CreateAssignStmt(ref, )
 //
 //	intLiteral.CreateIntLiteral()
@@ -49,10 +49,16 @@ package init
 //}
 
 func test() {
+
+	//stmt.CreateAssignStmt()
+	//stmt.Stmt
+	//function.CreateFuncDefine()
+	//funcdef.Function{}
 	//declare.CreateDeclareStmt(s, assign.AssignStmt{})
 	//symbolTable.PushFrame()
 	//declare.DeclareStmt{}
 	//function.CreateFuncDefine(1,"1", nil, nil)
 	//var v5 interface{}
 	//v5 = 1
+	//reference.CreateVariableReference()
 }

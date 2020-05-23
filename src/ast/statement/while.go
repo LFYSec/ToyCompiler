@@ -1,18 +1,16 @@
-package while
+package stmt
 
 import (
 	"Compiler/src/ast/expression/rvalue"
-	stmt "Compiler/src/ast/statement"
-	"Compiler/src/ast/statement/compound"
 	"fmt"
 )
 
 var NextWhileId = 0
 
 type WhileStmt struct {
-	stmt.Stmt
+	Stmt
 	Condition 	rvalue.RValue
-	CStmts 	*compound.CompoundStmt
+	CStmts 	*CompoundStmt
 }
 
 func (w WhileStmt) GeneCode() {
@@ -32,7 +30,7 @@ func (w WhileStmt) GeneCode() {
 	fmt.Printf("while_end_%d:\n", NextWhileId)
 }
 
-func CreateWhileStmt(c rvalue.RValue, s *compound.CompoundStmt) WhileStmt {
+func CreateWhileStmt(c rvalue.RValue, s *CompoundStmt) WhileStmt {
 	var whileStmt WhileStmt
 	whileStmt.Condition = c
 	whileStmt.CStmts = s

@@ -17,6 +17,7 @@
 "else"                      {return ELSE;}
 "while"                     {return WHILE;}
 "print"                     {return PRINT;}
+"return"                    {return RETURN;}
 ([-])?[0-9]+                {return INT_LITERAL;}
 ([-])?[0-9]+\.[0-9]*        {return DOUBLE_LITERAL;}
 [a-zA-Z][0-9a-zA-Z_]*       {return IDENTIFY;}
@@ -41,4 +42,5 @@
 [ \t]                       {}
 "!"                         {return NOT;}
 ","                         {return COMMA;}
+";"                         {return EOS;}
 %%

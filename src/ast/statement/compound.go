@@ -1,15 +1,11 @@
-package compound
-
-import (
-	stmt "Compiler/src/ast/statement"
-)
+package stmt
 
 var NextNamespaceId = 0
 
 type CompoundStmt struct {
-	stmt.Stmt
+	Stmt
 	ChildCount 	int
-	Stmts 		[]stmt.Stmt
+	Stmts 		[]Stmt
 	NamespaceId	int
 }
 
@@ -19,7 +15,7 @@ func (c CompoundStmt) GeneCode() {
 	}
 }
 
-func AddStmt(compound *CompoundStmt, s stmt.Stmt) {
+func AddStmt(compound *CompoundStmt, s Stmt) {
 	compound.Stmts = append(compound.Stmts, s)
 	compound.ChildCount++
 }

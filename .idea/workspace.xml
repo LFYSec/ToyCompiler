@@ -2,14 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef038bf5-983e-4789-bdaa-ff6f6f64d0ee" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ast/statement/function/function.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ast/statement/while/while.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ast/expression/lvalue/reference/arrayReference.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ast/statement/function/funcall.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ast/statement/if.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ast/statement/return.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test3.ll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/lfy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/lfy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/expression/lvalue/variableReference/variableReference.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/lvalue/reference/variableReference.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/assign/assign.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/assign.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/compound/compound.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/compound.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/declare/declare.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/declare.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/function/function.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/function/funcdef.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/print/print.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/print.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/while/while.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/while.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/global/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/global/const.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/grammer.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/grammer.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/init.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/lex.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/lex.l" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.l" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/lex.yy.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.yy.c" afterDir="false" />
@@ -17,11 +31,10 @@
       <change beforePath="$PROJECT_DIR$/src/init/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/token.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/token.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/y.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/y.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbol/symbol.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbol/symbol.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbol/symbol.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbol.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/symbolTable/symbolTable.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbolTable.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbolType.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbolType.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.l" beforeDir="false" afterPath="$PROJECT_DIR$/test.l" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.ll" beforeDir="false" afterPath="$PROJECT_DIR$/test.ll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.l" beforeDir="false" afterPath="$PROJECT_DIR$/test2.l" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/y.output" beforeDir="false" afterPath="$PROJECT_DIR$/y.output" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,11 +84,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/symbolTable" />
+      <recent name="$PROJECT_DIR$/src/ast/statement" />
+      <recent name="$PROJECT_DIR$/src/ast/statement/function" />
+      <recent name="$PROJECT_DIR$/src/ast/statement/function/funcdef" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/init" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/tools" />
-      <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -136,24 +149,19 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/ast/expression/lvalue/variableReference/variableReference.go</url>
-          <line>26</line>
-          <option name="timeStamp" value="31" />
+          <url>file://$PROJECT_DIR$/src/ast/statement/function/funcall.go</url>
+          <line>30</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/ast/statement/assign/assign.go</url>
-          <line>19</line>
-          <option name="timeStamp" value="32" />
+          <url>file://$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go</url>
+          <line>142</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/ast/expression/rvalue/intLiteral/intLiteral.go</url>
-          <line>19</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/ast/statement/assign/assign.go</url>
-          <line>17</line>
-          <option name="timeStamp" value="34" />
+          <url>file://$PROJECT_DIR$/src/ast/statement/print.go</url>
+          <line>14</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

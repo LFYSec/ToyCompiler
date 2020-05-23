@@ -65,6 +65,9 @@ func (l *lex) Lex(yylval *yySymType) int {
 	case C.WHILE:
 		//fmt.Println("while")
 		return WHILE
+	case C.RETURN:
+		//fmt.Println("while")
+		return RETURN
 	case C.PRINT:
 		//fmt.Println("print")
 		return PRINT
@@ -133,6 +136,8 @@ func (l *lex) Lex(yylval *yySymType) int {
 		return COMMA
 	case C.EOL:
 		return EOL
+	case C.EOS:
+		return EOS
 	case C.ASSIGN:
 		yylval.string_value = l.yytext
 		return ASSIGN

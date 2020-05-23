@@ -8,6 +8,7 @@
       <w>fdiv</w>
       <w>fmul</w>
       <w>fsub</w>
+      <w>funcs</w>
       <w>goyacc</w>
       <w>greatereq</w>
       <w>icmp</w>

@@ -1,15 +1,14 @@
-package assign
+package stmt
 
 import (
 	"Compiler/src/ast/expression/lvalue"
 	"Compiler/src/ast/expression/rvalue"
-	stmt "Compiler/src/ast/statement"
 	"Compiler/src/symbolTable"
 	"fmt"
 )
 
 type AssignStmt struct {
-	stmt.Stmt
+	Stmt
 	LHS 		lvalue.LValue
 	RHS 		rvalue.RValue
 }
@@ -20,7 +19,7 @@ func (a AssignStmt) GeneCode() {
 	RVIR := a.RHS.RvalueIR()
 	LVIR := a.LHS.LvalueIR()
 	fmt.Printf("store %s %s, %s* %s\n",
-		symbolTable.TypeString(a.LHS.GetType()),
+		symbolTable.TypeString(a.RHS.GetType()), // TODO fix array.GetType()
 		RVIR,
 		symbolTable.TypeString(a.RHS.GetType()),
 		LVIR,

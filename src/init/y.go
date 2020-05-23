@@ -7,30 +7,25 @@ package init
 import __yyfmt__ "fmt"
 
 //line src/init/grammer.y:3
+
 import (
-	//"fmt"
 	"Compiler/src/ast"
 	"Compiler/src/ast/expression/lvalue"
-	"Compiler/src/ast/expression/lvalue/variableReference"
+	"Compiler/src/ast/expression/lvalue/reference"
 	"Compiler/src/ast/expression/rvalue"
 	"Compiler/src/ast/expression/rvalue/binOperateResult"
 	"Compiler/src/ast/expression/rvalue/doubleLiteral"
 	"Compiler/src/ast/expression/rvalue/intLiteral"
 	stmt "Compiler/src/ast/statement"
-	"Compiler/src/ast/statement/assign"
-	"Compiler/src/ast/statement/compound"
-	"Compiler/src/ast/statement/declare"
 	"Compiler/src/ast/statement/function"
-	"Compiler/src/ast/statement/print"
-	"Compiler/src/ast/statement/while"
 	"Compiler/src/global"
 	"Compiler/src/symbolTable"
-	"Compiler/src/symbolTable/symbol"
+	"fmt"
 )
 
-var result *compound.CompoundStmt
+var result *stmt.CompoundStmt
 
-//line src/init/grammer.y:35
+//line src/init/grammer.y:25
 type yySymType struct {
 	yys          int
 	int_value    int
@@ -57,25 +52,27 @@ const WHILE = 57359
 const FOR = 57360
 const PRINT = 57361
 const EOL = 57362
-const EQ = 57363
-const NE = 57364
-const LT = 57365
-const LE = 57366
-const GT = 57367
-const GE = 57368
-const ASSIGN = 57369
-const COMMA = 57370
-const ADD = 57371
-const SUB = 57372
-const MUL = 57373
-const DIV = 57374
-const NOT = 57375
-const LBRACKET = 57376
-const RBRACKET = 57377
-const LPARENTHESIS = 57378
-const RPARENTHESIS = 57379
-const LBRACE = 57380
-const RBRACE = 57381
+const RETURN = 57363
+const EOS = 57364
+const EQ = 57365
+const NE = 57366
+const LT = 57367
+const LE = 57368
+const GT = 57369
+const GE = 57370
+const ASSIGN = 57371
+const COMMA = 57372
+const ADD = 57373
+const SUB = 57374
+const MUL = 57375
+const DIV = 57376
+const NOT = 57377
+const LBRACKET = 57378
+const RBRACKET = 57379
+const LPARENTHESIS = 57380
+const RPARENTHESIS = 57381
+const LBRACE = 57382
+const RBRACE = 57383
 
 var yyToknames = [...]string{
 	"$end",
@@ -98,6 +95,8 @@ var yyToknames = [...]string{
 	"FOR",
 	"PRINT",
 	"EOL",
+	"RETURN",
+	"EOS",
 	"EQ",
 	"NE",
 	"LT",
@@ -124,7 +123,7 @@ const yyEofCode = 1
 const yyErrCode = 2
 const yyInitialStackSize = 16
 
-//line src/init/grammer.y:266
+//line src/init/grammer.y:364
 
 //line yacctab:1
 var yyExca = [...]int{
@@ -135,64 +134,88 @@ var yyExca = [...]int{
 
 const yyPrivate = 57344
 
-const yyLast = 71
+const yyLast = 119
 
 var yyAct = [...]int{
 
-	5, 24, 6, 11, 14, 14, 27, 28, 11, 14,
-	14, 27, 28, 20, 12, 54, 13, 49, 10, 45,
-	18, 13, 17, 10, 53, 40, 25, 22, 17, 31,
-	32, 37, 42, 33, 15, 2, 30, 12, 38, 36,
-	41, 30, 12, 47, 48, 34, 35, 51, 29, 16,
-	9, 55, 19, 43, 52, 57, 56, 39, 44, 46,
-	26, 7, 4, 3, 23, 50, 8, 21, 1, 0,
-	9,
+	7, 10, 23, 16, 19, 54, 17, 77, 28, 24,
+	25, 75, 57, 35, 20, 36, 18, 31, 15, 56,
+	13, 58, 88, 19, 24, 25, 82, 28, 24, 25,
+	35, 29, 52, 30, 26, 61, 14, 93, 64, 17,
+	59, 27, 65, 66, 67, 68, 69, 70, 71, 72,
+	73, 74, 85, 89, 16, 19, 27, 2, 95, 80,
+	27, 83, 87, 78, 55, 20, 84, 18, 14, 15,
+	76, 13, 48, 47, 44, 45, 43, 46, 51, 50,
+	39, 40, 41, 42, 96, 38, 86, 92, 91, 79,
+	17, 60, 21, 94, 101, 98, 32, 34, 100, 37,
+	99, 97, 81, 12, 11, 9, 49, 3, 8, 6,
+	53, 5, 4, 22, 62, 63, 90, 33, 1,
 }
 var yyPact = [...]int{
 
-	-1000, 4, 14, -1000, -1000, -1000, -1000, -1000, -1000, 1,
-	-16, 47, -26, 0, -1000, -1000, -1000, 0, 0, -5,
-	-1000, -1, -24, 11, -1000, -1000, 5, -1000, -1000, -1000,
-	0, -1000, -1000, -1000, -1000, -18, -1000, -1000, -1000, -1000,
-	-1000, 0, 0, -1000, -20, -1000, 50, -1000, -1000, -1000,
-	-13, -1000, 46, -24, 50, 1, -1000, -1000,
+	-1000, 50, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+	-1000, -1000, -1000, 3, 4, -21, 91, -1000, 3, -23,
+	3, 63, 49, -1000, -1000, -1000, -1000, 3, -6, 57,
+	18, 3, -17, -1, -34, 3, -1000, -34, -1000, 3,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, -28,
+	-1000, -1000, 48, -32, -1000, 41, 83, 18, -1000, -1000,
+	-1000, -1000, -11, 22, 70, -1000, -1000, -1000, -1000, -1000,
+	-1000, -1000, -1000, -1000, -1000, -1000, -1000, 40, -1000, -15,
+	31, -1000, -1000, -1000, -1000, 3, -34, -1000, 15, -1000,
+	54, -1000, -1000, -1000, -1000, 90, 96, -34, -1000, 89,
+	-1000, -1000,
 }
 var yyPgo = [...]int{
 
-	0, 27, 35, 68, 39, 2, 67, 66, 65, 26,
-	1, 64, 48, 63, 62, 0, 61, 60, 59,
+	0, 78, 57, 118, 31, 0, 117, 116, 115, 2,
+	113, 34, 112, 111, 109, 108, 107, 105, 1, 104,
+	103, 102, 101,
 }
 var yyR1 = [...]int{
 
-	0, 3, 3, 4, 15, 15, 13, 14, 16, 2,
-	2, 2, 2, 2, 2, 9, 9, 9, 9, 12,
-	17, 17, 17, 10, 10, 11, 11, 11, 1, 5,
-	5, 6, 6, 18, 7, 8, 8, 8,
+	0, 3, 3, 14, 14, 14, 4, 12, 13, 20,
+	20, 15, 16, 2, 2, 2, 2, 2, 2, 2,
+	2, 2, 2, 9, 9, 9, 9, 11, 11, 10,
+	10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+	1, 5, 6, 6, 18, 19, 19, 21, 22, 17,
+	7, 7, 7, 8, 8, 8,
 }
 var yyR2 = [...]int{
 
-	0, 0, 3, 2, 2, 3, 2, 4, 3, 1,
-	1, 1, 1, 1, 1, 1, 1, 1, 3, 1,
-	1, 1, 1, 1, 2, 1, 3, 3, 1, 2,
-	3, 2, 0, 0, 7, 0, 1, 3,
+	0, 0, 2, 3, 4, 6, 2, 3, 5, 3,
+	5, 3, 3, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 3, 1, 4, 1,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+	1, 3, 2, 0, 4, 4, 5, 0, 0, 8,
+	0, 3, 4, 0, 2, 3,
 }
 var yyChk = [...]int{
 
-	-1000, -3, -2, -13, -14, -15, -5, -16, -7, -12,
-	19, 4, 38, 17, 5, 20, -4, 27, 36, 5,
-	39, -6, -1, -11, -10, -9, -17, 6, 7, -12,
-	36, 29, 30, 33, -1, -1, -4, 36, 39, -2,
-	-5, 29, 21, -9, -1, 37, -18, -10, -10, 37,
-	-8, -15, 4, 37, 28, 5, -5, -15,
+	-1000, -3, -2, -16, -12, -13, -14, -5, -15, -17,
+	-18, -19, -20, 21, -11, 19, 4, 40, 17, 5,
+	15, -1, -10, -9, 6, 7, -11, 38, 5, -4,
+	29, 38, 5, -6, -1, 36, 38, -1, 22, 31,
+	32, 33, 34, 27, 25, 26, 28, 24, 23, -1,
+	22, -1, -18, -1, 22, -4, 36, 29, 38, 41,
+	-2, -5, -1, -8, -5, -9, -9, -9, -9, -9,
+	-9, -9, -9, -9, -9, 39, 22, 39, 22, 6,
+	-18, -21, 37, 39, -9, 30, 16, 22, 37, 22,
+	-7, -9, -5, 22, 39, 4, 30, -22, 5, 4,
+	-5, 5,
 }
 var yyDef = [...]int{
 
-	1, -2, 0, 9, 10, 11, 12, 13, 14, 0,
-	0, 0, 32, 0, 19, 2, 6, 0, 0, 4,
-	29, 0, 0, 28, 25, 23, 0, 15, 16, 17,
-	0, 20, 21, 22, 3, 0, 5, 33, 30, 31,
-	8, 0, 0, 24, 0, 7, 35, 26, 27, 18,
-	0, 36, 0, 0, 0, 4, 34, 37,
+	1, -2, 2, 13, 14, 15, 16, 17, 18, 19,
+	20, 21, 22, 0, 0, 0, 0, 43, 0, 27,
+	0, 0, 40, 29, 23, 24, 25, 0, 27, 0,
+	0, 0, 0, 0, 0, 0, 53, 0, 12, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	7, 6, 0, 0, 3, 0, 0, 0, 47, 41,
+	42, 11, 0, 0, 9, 30, 31, 32, 33, 34,
+	35, 36, 37, 38, 39, 26, 45, 0, 4, 0,
+	0, 50, 28, 44, 54, 0, 0, 8, 0, 46,
+	0, 55, 10, 5, 48, 0, 0, 0, 51, 0,
+	49, 52,
 }
 var yyTok1 = [...]int{
 
@@ -203,7 +226,7 @@ var yyTok2 = [...]int{
 	2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 	12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 	22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-	32, 33, 34, 35, 36, 37, 38, 39,
+	32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
 }
 var yyTok3 = [...]int{
 	0,
@@ -548,231 +571,372 @@ yydefault:
 
 	case 1:
 		yyDollar = yyS[yypt-0 : yypt+1]
-//line src/init/grammer.y:70
+//line src/init/grammer.y:61
 		{
-			result = compound.CreateCompoundStmt()
+			result = stmt.CreateCompoundStmt()
 			yyVAL.node = result
 		}
 	case 2:
-		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:74
+		yyDollar = yyS[yypt-2 : yypt+1]
+//line src/init/grammer.y:65
 		{
-			v1 := (yyDollar[1].node).(*compound.CompoundStmt)
+			v1 := (yyDollar[1].node).(*stmt.CompoundStmt)
 			v2 := (yyDollar[2].node).(stmt.Stmt)
-			compound.AddStmt(v1, v2)
+			stmt.AddStmt(v1, v2)
 		}
 	case 3:
-		yyDollar = yyS[yypt-2 : yypt+1]
-//line src/init/grammer.y:82
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:73
 		{
-			yyVAL.node = yyDollar[2].node
+			s := symbolTable.CreateSymbol(true, yyDollar[1].symbolType, yyDollar[2].string_value, 0)
+			symbolTable.AddSymbol(s)
+			yyVAL.node = stmt.CreateDeclareStmt(s, stmt.AssignStmt{})
 		}
 	case 4:
-		yyDollar = yyS[yypt-2 : yypt+1]
-//line src/init/grammer.y:88
+		yyDollar = yyS[yypt-4 : yypt+1]
+//line src/init/grammer.y:78
 		{
-			s := symbol.CreateSymbol(true, yyDollar[1].symbolType, yyDollar[2].string_value)
+			s := symbolTable.CreateSymbol(true, yyDollar[1].symbolType, yyDollar[2].string_value, 0)
 			symbolTable.AddSymbol(s)
-			yyVAL.node = declare.CreateDeclareStmt(s, assign.AssignStmt{})
+			ref := reference.CreateVariableReference(s)
+			v := (yyDollar[3].node).(rvalue.RValue)
+			a := stmt.CreateAssignStmt(ref, v)
+			yyVAL.node = stmt.CreateDeclareStmt(s, a)
 		}
 	case 5:
-		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:93
+		yyDollar = yyS[yypt-6 : yypt+1]
+//line src/init/grammer.y:87
 		{
-			s := symbol.CreateSymbol(true, yyDollar[1].symbolType, yyDollar[2].string_value)
+			s := symbolTable.CreateSymbol(true, yyDollar[1].symbolType, yyDollar[2].string_value, yyDollar[4].int_value)
 			symbolTable.AddSymbol(s)
-			ref := variableReference.CreateVariableReference(s)
-			v := (yyDollar[3].node).(rvalue.RValue)
-			a := assign.CreateAssignStmt(ref, v)
-			yyVAL.node = declare.CreateDeclareStmt(s, a)
+			yyVAL.node = stmt.CreateDeclareStmt(s, stmt.AssignStmt{})
 		}
 	case 6:
 		yyDollar = yyS[yypt-2 : yypt+1]
-//line src/init/grammer.y:104
+//line src/init/grammer.y:95
+		{
+			yyVAL.node = yyDollar[2].node
+		}
+	case 7:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:101
 		{
 			v1 := (yyDollar[1].node).(lvalue.LValue)
 			v2 := (yyDollar[2].node).(rvalue.RValue)
-			yyVAL.node = assign.CreateAssignStmt(v1, v2)
-		}
-	case 7:
-		yyDollar = yyS[yypt-4 : yypt+1]
-//line src/init/grammer.y:112
-		{
-			//		if v3, ok := ($3).(variableReference.VariableReference); ok == true {
-			//			$$ = print.CreatePrintStmt(v3)
-			//		} else {
-			//			v3 = ($3).(rvalue.RValue)
-			//                    	$$ = print.CreatePrintStmt(v3)
-			//		}
-			v3 := (yyDollar[3].node).(rvalue.RValue)
-			yyVAL.node = print.CreatePrintStmt(v3)
+			yyVAL.node = stmt.CreateAssignStmt(v1, v2)
 		}
 	case 8:
+		yyDollar = yyS[yypt-5 : yypt+1]
+//line src/init/grammer.y:109
+		{
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = stmt.CreatePrintStmt(v3)
+		}
+	case 9:
 		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:125
+//line src/init/grammer.y:116
 		{
 			symbolTable.PushFrame()
 			v2 := (yyDollar[2].node).(rvalue.RValue)
-			v3 := (yyDollar[3].node).(*compound.CompoundStmt)
-			yyVAL.node = while.CreateWhileStmt(v2, v3)
+			v3 := (yyDollar[3].node).(*stmt.CompoundStmt)
+			yyVAL.node = stmt.CreateIfStmt(v2, v3, nil)
 			symbolTable.PopFrame()
 		}
-	case 15:
-		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:146
+	case 10:
+		yyDollar = yyS[yypt-5 : yypt+1]
+//line src/init/grammer.y:123
 		{
-			yyVAL.node = intLiteral.CreateIntLiteral(yyDollar[1].int_value)
+			symbolTable.PushFrame()
+			v2 := (yyDollar[2].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(*stmt.CompoundStmt)
+			v5 := (yyDollar[5].node).(*stmt.CompoundStmt)
+			yyVAL.node = stmt.CreateIfStmt(v2, v3, v5)
+			symbolTable.PopFrame()
 		}
-	case 16:
-		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:149
-		{
-			yyVAL.node = doubleLiteral.CreateDoubleLiteral(yyDollar[1].double_value)
-		}
-	case 17:
-		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:152
-		{
-			yyVAL.node = yyDollar[1].node
-		}
-	case 18:
+	case 11:
 		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:155
+//line src/init/grammer.y:133
 		{
-			yyVAL.node = yyDollar[2].node
+			symbolTable.PushFrame()
+			v2 := (yyDollar[2].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(*stmt.CompoundStmt)
+			yyVAL.node = stmt.CreateWhileStmt(v2, v3)
+			symbolTable.PopFrame()
 		}
-	case 19:
-		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:161
+	case 12:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:143
 		{
-			sb := symbolTable.GetSymbol(yyDollar[1].string_value)
-			if sb == nil {
-				panic("[*] Error: Undefined var")
-			}
-			yyVAL.node = variableReference.CreateVariableReference(sb)
+			v2 := (yyDollar[2].node).(rvalue.RValue)
+			yyVAL.node = stmt.CreateRetStmt(v2)
 		}
 	case 23:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:176
+//line src/init/grammer.y:164
 		{
-			yyVAL.node = yyDollar[1].node
+			yyVAL.node = intLiteral.CreateIntLiteral(yyDollar[1].int_value)
 		}
 	case 24:
-		yyDollar = yyS[yypt-2 : yypt+1]
-//line src/init/grammer.y:177
+		yyDollar = yyS[yypt-1 : yypt+1]
+//line src/init/grammer.y:167
 		{
-			yyVAL.node = yyDollar[2].node
+			yyVAL.node = doubleLiteral.CreateDoubleLiteral(yyDollar[1].double_value)
 		}
 	case 25:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:181
+//line src/init/grammer.y:170
 		{
 			yyVAL.node = yyDollar[1].node
 		}
 	case 26:
 		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:182
+//line src/init/grammer.y:173
+		{
+			yyVAL.node = yyDollar[2].node
+		}
+	case 27:
+		yyDollar = yyS[yypt-1 : yypt+1]
+//line src/init/grammer.y:179
+		{
+			sb := symbolTable.GetVarSymbol(yyDollar[1].string_value)
+			if sb == nil {
+				panic("[*] Error: Undefined variable: " + string(yyDollar[1].string_value))
+			}
+			yyVAL.node = reference.CreateVariableReference(sb)
+		}
+	case 28:
+		yyDollar = yyS[yypt-4 : yypt+1]
+//line src/init/grammer.y:186
+		{
+			sb := symbolTable.GetVarSymbol(yyDollar[1].string_value)
+			if sb == nil {
+				panic("[*] Error: Undefined array: " + string(yyDollar[1].string_value))
+			}
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = reference.CreateArrayReference(sb, v3)
+		}
+	case 29:
+		yyDollar = yyS[yypt-1 : yypt+1]
+//line src/init/grammer.y:197
+		{
+			yyVAL.node = yyDollar[1].node
+		}
+	case 30:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:200
 		{
 			v1 := (yyDollar[1].node).(rvalue.RValue)
 			v3 := (yyDollar[3].node).(rvalue.RValue)
 			yyVAL.node = binOperateResult.CreateBinOperateResult(ADD, v1, v3)
 		}
-	case 27:
+	case 31:
 		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:187
+//line src/init/grammer.y:205
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(SUB, v1, v3)
+		}
+	case 32:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:210
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(MUL, v1, v3)
+		}
+	case 33:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:215
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(DIV, v1, v3)
+		}
+	case 34:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:220
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(GT, v1, v3)
+		}
+	case 35:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:225
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(LT, v1, v3)
+		}
+	case 36:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:230
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(LE, v1, v3)
+		}
+	case 37:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:235
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(GE, v1, v3)
+		}
+	case 38:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:240
+		{
+			v1 := (yyDollar[1].node).(rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = binOperateResult.CreateBinOperateResult(NE, v1, v3)
+		}
+	case 39:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:245
 		{
 			v1 := (yyDollar[1].node).(rvalue.RValue)
 			v3 := (yyDollar[3].node).(rvalue.RValue)
 			yyVAL.node = binOperateResult.CreateBinOperateResult(EQ, v1, v3)
 		}
-	case 28:
+	case 40:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:195
+//line src/init/grammer.y:253
 		{
 			yyVAL.node = yyDollar[1].node
 		}
-	case 29:
-		yyDollar = yyS[yypt-2 : yypt+1]
-//line src/init/grammer.y:201
-		{
-			//fmt.Println("None stmts func")
-			yyVAL.node = nil
-		}
-	case 30:
+	case 41:
 		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:205
+//line src/init/grammer.y:259
 		{
 			yyVAL.node = yyDollar[2].node
 		}
-	case 31:
+	case 42:
 		yyDollar = yyS[yypt-2 : yypt+1]
-//line src/init/grammer.y:210
+//line src/init/grammer.y:265
 		{
-			v1 := (yyDollar[1].node).(*compound.CompoundStmt)
+			v1 := (yyDollar[1].node).(*stmt.CompoundStmt)
 			v2 := (yyDollar[2].node).(stmt.Stmt)
-			compound.AddStmt(v1, v2)
+			stmt.AddStmt(v1, v2)
 		}
-	case 32:
+	case 43:
 		yyDollar = yyS[yypt-0 : yypt+1]
-//line src/init/grammer.y:215
+//line src/init/grammer.y:270
 		{
-			yyVAL.node = compound.CreateCompoundStmt()
+			yyVAL.node = stmt.CreateCompoundStmt()
 		}
-	case 33:
+	case 44:
+		yyDollar = yyS[yypt-4 : yypt+1]
+//line src/init/grammer.y:278
+		{
+			v1 := yyDollar[1].string_value
+			if (yyDollar[3].node) != nil {
+				v3 := (yyDollar[3].node).([]*rvalue.RValue)
+				yyVAL.node = function.CreateFuncCallStmt(v1, v3)
+			} else {
+				yyVAL.node = function.CreateFuncCallStmt(v1, nil)
+			}
+		}
+	case 45:
+		yyDollar = yyS[yypt-4 : yypt+1]
+//line src/init/grammer.y:290
+		{
+			v1 := (yyDollar[1].node).(lvalue.LValue)
+			v3 := (yyDollar[3].node).(stmt.Stmt)
+			yyVAL.node = function.CreateAssignFunCallStmt(v1, v3)
+		}
+	case 46:
+		yyDollar = yyS[yypt-5 : yypt+1]
+//line src/init/grammer.y:296
+		{
+			s := symbolTable.CreateSymbol(true, yyDollar[1].symbolType, yyDollar[2].string_value, 0)
+			symbolTable.AddSymbol(s)
+			ref := reference.CreateVariableReference(s)
+			v4 := (yyDollar[4].node).(stmt.Stmt)
+			yyVAL.node = function.CreateAssignFunCallStmt(ref, v4)
+		}
+	case 47:
 		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:224
+//line src/init/grammer.y:306
 		{
 			symbolTable.PushFrame()
 		}
-	case 34:
-		yyDollar = yyS[yypt-7 : yypt+1]
-//line src/init/grammer.y:224
+	case 48:
+		yyDollar = yyS[yypt-6 : yypt+1]
+//line src/init/grammer.y:306
 		{
-			//CreateFunc()
-			v1 := yyDollar[1].symbolType // function return type
+			if (yyDollar[5].node) == nil {
+				function.AddFunc(yyDollar[1].symbolType, yyDollar[2].string_value, nil)
+			} else {
+				v5 := (yyDollar[5].node).([]*stmt.DeclareStmt)
+				function.AddFunc(yyDollar[1].symbolType, yyDollar[2].string_value, v5)
+			}
+		}
+	case 49:
+		yyDollar = yyS[yypt-8 : yypt+1]
+//line src/init/grammer.y:313
+		{
 			/*
 						function name, add to symbolTable
 			                	(作用域？全局符号表第几级？)
 			                	update：目前仍全局符号栈里了
 			*/
-			v2 := (yyDollar[2].string_value)
-			if (yyDollar[7].node) == nil {
-				yyVAL.node = function.CreateFuncDefine(v1, v2, nil, nil)
-			} else {
-				v7 := (yyDollar[7].node).(*compound.CompoundStmt) // function stmts
-				if (yyDollar[5].node) != nil {
-					v5 := (yyDollar[5].node).([]*declare.DeclareStmt) // function args
-					yyVAL.node = function.CreateFuncDefine(v1, v2, v5, v7)
-				} else {
-					yyVAL.node = function.CreateFuncDefine(v1, v2, nil, v7)
-				}
-			}
+			v2 := yyDollar[2].string_value
+			v8 := (yyDollar[8].node).(*stmt.CompoundStmt)
+			yyVAL.node = function.CreateFuncDefine(v2, v8)
 			symbolTable.PopFrame()
 		}
-	case 35:
+	case 50:
 		yyDollar = yyS[yypt-0 : yypt+1]
-//line src/init/grammer.y:249
+//line src/init/grammer.y:327
 		{
-			//fmt.Println("None args func")
 			yyVAL.node = nil
 		}
-	case 36:
-		yyDollar = yyS[yypt-1 : yypt+1]
-//line src/init/grammer.y:253
+	case 51:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:330
 		{
-			//fmt.Println("args branch")
-			var declareStmts []*declare.DeclareStmt
-			v1 := (yyDollar[1].node).(declare.DeclareStmt)
+			s := symbolTable.CreateSymbol(true, yyDollar[2].symbolType, yyDollar[3].string_value, 0)
+			symbolTable.AddSymbol(s)
+			v1 := stmt.CreateDeclareStmt(s, stmt.AssignStmt{})
+			var declareStmts []*stmt.DeclareStmt
 			yyVAL.node = append(declareStmts, &v1)
 		}
-	case 37:
-		yyDollar = yyS[yypt-3 : yypt+1]
-//line src/init/grammer.y:259
+	case 52:
+		yyDollar = yyS[yypt-4 : yypt+1]
+//line src/init/grammer.y:337
 		{
-			v1 := (yyDollar[1].node).([]*declare.DeclareStmt)
-			v3 := (yyDollar[3].node).(declare.DeclareStmt)
+			s := symbolTable.CreateSymbol(true, yyDollar[3].symbolType, yyDollar[4].string_value, 0)
+			symbolTable.AddSymbol(s)
+			v3 := stmt.CreateDeclareStmt(s, stmt.AssignStmt{})
+
+			v1 := (yyDollar[1].node).([]*stmt.DeclareStmt)
 			yyVAL.node = append(v1, &v3)
-			//fmt.Println("Another args")
+		}
+	case 53:
+		yyDollar = yyS[yypt-0 : yypt+1]
+//line src/init/grammer.y:348
+		{
+			yyVAL.node = nil
+		}
+	case 54:
+		yyDollar = yyS[yypt-2 : yypt+1]
+//line src/init/grammer.y:351
+		{
+			var rv []*rvalue.RValue
+			v2 := (yyDollar[2].node).(rvalue.RValue)
+			yyVAL.node = append(rv, &v2)
+		}
+	case 55:
+		yyDollar = yyS[yypt-3 : yypt+1]
+//line src/init/grammer.y:356
+		{
+			v1 := (yyDollar[1].node).([]*rvalue.RValue)
+			v3 := (yyDollar[3].node).(rvalue.RValue)
+			yyVAL.node = append(v1, &v3)
+			fmt.Println("Another callargs")
 		}
 	}
 	goto yystack /* stack new state and value */

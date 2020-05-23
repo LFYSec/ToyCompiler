@@ -1,14 +1,13 @@
-package print
+package stmt
 
 import (
 	"Compiler/src/ast/expression/rvalue"
-	stmt "Compiler/src/ast/statement"
 	"Compiler/src/global"
 	"fmt"
 )
 
 type PrintStmt struct {
-	stmt.Stmt
+	Stmt
 	Expr rvalue.RValue
 }
 
@@ -17,10 +16,10 @@ func (p PrintStmt) GeneCode() {
 	ir := p.Expr.RvalueIR()
 	switch p.Expr.GetType() {
 	case global.INT_LITERAL:
-		fmt.Printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @int_fmt_str, i32 0, i32 0), i32 %s)\n", ir)
+		fmt.Printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.int, i32 0, i32 0), i32 %s)\n", ir)
 		break
 	case global.DOUBLE_LITERAL:
-		fmt.Printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @double_fmt_str, i32 0, i32 0), double %s)\n", ir)
+		fmt.Printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.double, i32 0, i32 0), double %s)\n", ir)
 		break
 	default:
 		break

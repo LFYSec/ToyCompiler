@@ -1,10 +1,10 @@
-package variableReference
+package reference
 
 import (
 	"Compiler/src/ast/expression/lvalue"
 	"Compiler/src/ast/expression/rvalue"
 	"Compiler/src/global"
-	"Compiler/src/symbolTable/symbol"
+	"Compiler/src/symbolTable"
 	"fmt"
 )
 
@@ -12,7 +12,7 @@ type VariableReference struct {
 	lvalue.LValue
 	Type 		global.SymbolType
 	TmpRegId 	int
-	Variable	*symbol.Symbol
+	Variable	*symbolTable.Symbol
 }
 
 func (v VariableReference) GetType() global.SymbolType {
@@ -26,8 +26,8 @@ func (v VariableReference) GeneRVCode()  {
 	LVIR := v.LvalueIR()
 	fmt.Printf("%s = load %s, %s* %s\n",
 		RVIR,
-		symbol.TypeName(v.Variable),
-		symbol.TypeName(v.Variable),
+		symbolTable.TypeName(v.Variable),
+		symbolTable.TypeName(v.Variable),
 		LVIR,
 	)
 }
@@ -43,7 +43,7 @@ func (v VariableReference) RvalueIR() string {
 }
 
 
-func CreateVariableReference(variable *symbol.Symbol) VariableReference {
+func CreateVariableReference(variable *symbolTable.Symbol) VariableReference {
 	if variable == nil {
 		panic("[*] Error: CreateVariableReference has nil symbol args")
 	}
