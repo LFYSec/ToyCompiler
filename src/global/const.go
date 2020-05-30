@@ -2,6 +2,8 @@ package global
 
 type SymbolType int
 
+const DEBUG  = true
+
 const TYPE = 57346
 const IDENTIFY = 57347
 const INT_LITERAL = 57348

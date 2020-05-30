@@ -2,39 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef038bf5-983e-4789-bdaa-ff6f6f64d0ee" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/literal/charLiteral.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ast/statement/scan.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Compiler" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clangtest/1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clangtest/1.l" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clangtest/t.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast/expression/rvalue/doubleLiteral/doubleLiteral.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/literal/doubleLiteral.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast/expression/rvalue/intLiteral/intLiteral.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/literal/intLiteral.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/expression/lvalue/reference/arrayReference.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/lvalue/reference/arrayReference.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ast/statement/function/funcall.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/function/funcall.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast/statement/print.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/print.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/scan.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/global/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/global/const.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/grammer.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/grammer.y" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/lex.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/lex.l" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.l" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/lex.yy.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.yy.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/lex.yy.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/lex.yy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/token.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/token.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init/y.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/y.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/symbolTable/symbol.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbol.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbolType.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbolType.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test1.l" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test1.ll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test2.l" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test2.ll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test3.l" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test3.ll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test4.l" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test4.ll" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +126,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/ast/statement/function/funcall.go</url>
-          <line>30</line>
+          <line>35</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -163,14 +140,19 @@
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/init/lex.go</url>
-          <line>78</line>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/ast/statement/print.go</url>
           <line>26</line>
           <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/ast/statement/scan.go</url>
+          <line>16</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/ast/statement/function/funcall.go</url>
+          <line>71</line>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

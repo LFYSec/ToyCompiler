@@ -4,17 +4,17 @@ import (
 	"Compiler/src/ast/expression/lvalue"
 	"Compiler/src/ast/expression/lvalue/reference"
 	"Compiler/src/ast/expression/rvalue"
+	"Compiler/src/ast/expression/rvalue/binOperateResult"
 	"Compiler/src/ast/expression/rvalue/literal"
 	stmt "Compiler/src/ast/statement"
 	st "Compiler/src/symbolTable"
 	"fmt"
-	"strconv"
 )
 
 type Funcall struct {
 	stmt.Stmt
 	FuncName 			string
-	FuncArgsValue		[]interface{}
+	FuncArgsValue		[]rvalue.RValue
 	LV 					lvalue.LValue
 }
 
@@ -25,17 +25,23 @@ type AssignFuncall struct {
 
 func (f Funcall) GeneCode() {
 	funcArgs := ""
-	argFormat := "%s %%%s,"
+	argFormat := "%s %s"
 	//TODO fix type error
+	count := 0
 	for _, i := range f.FuncArgsValue {
+		if count != 0 {
+			argFormat += ","
+		}
+		count ++
 		switch i.(type) {
-		//case *rvalue.RValue:
-		//	arg := i.(intLiteral.IntLiteral)
-		//	funcArgs += fmt.Sprintf(argFormat, st.TypeString(arg.Type), strconv.Itoa(arg.Value))
-		//}
 		case literal.IntLiteral:
 			arg := i.(literal.IntLiteral)
-			funcArgs += fmt.Sprintf(argFormat, st.TypeString(arg.Type), strconv.Itoa(arg.Value))
+			funcArgs += fmt.Sprintf(argFormat, st.TypeString(arg.Type), arg.RvalueIR())
+		case binOperateResult.BinOperateResult:
+			arg := i.(binOperateResult.BinOperateResult)
+			arg.GeneRVCode()
+			funcArgs += fmt.Sprintf(argFormat, st.TypeString(arg.Type), arg.RvalueIR())
+
 		}
 	}
 	fmt.Printf("%s = call %s @%s(%s)\n",
@@ -60,7 +66,7 @@ func (a AssignFuncall) GeneCode() {
 }
 
 // 返回Funcall和RValue，Funcall加入compoundStmt，LValue用于返回值后的assign语句，如果没有assign，比如空返回值，则nil
-func CreateFuncCallStmt(name string, rvs []*rvalue.RValue) Funcall {
+func CreateFuncCallStmt(name string, rvs []rvalue.RValue) Funcall {
 	var funcall Funcall
 	funcall.FuncName = name
 	for _, i := range rvs {

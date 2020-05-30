@@ -50,7 +50,7 @@ var result *stmt.CompoundStmt
 %left MUL DIV
 
 %type <node> expression statement program assign block stmtList defargs callargs
-%type <node> atomExpression binaryOrAtomExpression refExpression
+%type <node> atomExpression binaryOrAtomExpression refExpression unaryExpression
 %type <node> assignStatement printStatement declareStatement whileStatement scanStatement
 %type <node> returnStatement funcDefineStmt funCallStmt assignFunCallStmt ifStatement
 
@@ -168,6 +168,11 @@ statement
 	| scanStatement
 	;
 
+unaryExpression
+	: atomExpression {
+		$$=$1;
+	}
+	;
 
 atomExpression
 	: INT_LITERAL {
@@ -206,55 +211,57 @@ refExpression
 	;
 
 binaryOrAtomExpression
-	: atomExpression {
+	: unaryExpression { // 最低优先级，防止比如print(a-1)识别为a,-1
+//		fmt.Println("test0")
 		$$=$1
 	}
-    	| binaryOrAtomExpression ADD atomExpression {
+	| binaryOrAtomExpression ADD unaryExpression {
     		v1 := ($1).(rvalue.RValue)
     		v3 := ($3).(rvalue.RValue)
     		$$ = binOperateResult.CreateBinOperateResult(ADD, v1, v3)
     	}
-    	| binaryOrAtomExpression SUB atomExpression {
+    	| binaryOrAtomExpression SUB unaryExpression {
+//    		fmt.Println("test1")
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(SUB, v1, v3)
 	}
-	| binaryOrAtomExpression MUL atomExpression {
+	| binaryOrAtomExpression MUL unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(MUL, v1, v3)
 	}
-	| binaryOrAtomExpression DIV atomExpression {
+	| binaryOrAtomExpression DIV unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(DIV, v1, v3)
 	}
-	| binaryOrAtomExpression GT atomExpression {
+	| binaryOrAtomExpression GT unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(GT, v1, v3)
 	}
-	| binaryOrAtomExpression LT atomExpression {
+	| binaryOrAtomExpression LT unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(LT, v1, v3)
 	}
-	| binaryOrAtomExpression LE atomExpression {
+	| binaryOrAtomExpression LE unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(LE, v1, v3)
 	}
-	| binaryOrAtomExpression GE atomExpression {
+	| binaryOrAtomExpression GE unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(GE, v1, v3)
 	}
-	| binaryOrAtomExpression NE atomExpression {
+	| binaryOrAtomExpression NE unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(NE, v1, v3)
 	}
-    	| binaryOrAtomExpression EQ atomExpression {
+    	| binaryOrAtomExpression EQ unaryExpression {
 		v1 := ($1).(rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
 		$$ = binOperateResult.CreateBinOperateResult(EQ, v1, v3)
@@ -290,7 +297,7 @@ funCallStmt
 	: IDENTIFY LPARENTHESIS callargs RPARENTHESIS {
 		v1 := $1
 		if ($3) != nil {
-			v3 := ($3).([]*rvalue.RValue)
+			v3 := ($3).([]rvalue.RValue)
 			$$ = function.CreateFuncCallStmt(v1, v3)
 		} else {
 			$$ = function.CreateFuncCallStmt(v1, nil)
@@ -361,15 +368,15 @@ callargs
 	: {
 		$$ = nil
 	}
-	| callargs atomExpression {
-		var rv []*rvalue.RValue
+	| callargs expression {
+		var rv []rvalue.RValue
 		v2 := ($2).(rvalue.RValue)
-		$$ = append(rv, &v2)
+		$$ = append(rv, v2)
 	}
-	| callargs COMMA atomExpression {
-		v1 := ($1).([]*rvalue.RValue)
+	| callargs COMMA expression {
+		v1 := ($1).([]rvalue.RValue)
 		v3 := ($3).(rvalue.RValue)
-		$$ = append(v1, &v3)
+		$$ = append(v1, v3)
 		fmt.Println("Another callargs")
 	}
 	;

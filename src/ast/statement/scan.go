@@ -1,9 +1,11 @@
 package stmt
 
 import (
+	"Compiler/src/ast/expression/lvalue/reference"
 	"Compiler/src/ast/expression/rvalue"
 	"Compiler/src/global"
 	"fmt"
+	"strconv"
 )
 
 type ScanStmt struct {
@@ -12,18 +14,19 @@ type ScanStmt struct {
 }
 
 func (s ScanStmt) GeneCode() {
-	s.Expr.GeneRVCode()
-	ir := s.Expr.RvalueIR()
+	x := s.Expr.(reference.VariableReference)
+	ir := "%" + x.Variable.Name + "_" + strconv.Itoa(x.Variable.NamespaceId)
 	switch s.Expr.GetType() {
 	case global.INT_LITERAL:
+
 		fmt.Printf("call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.scan.int, i32 0, i32 0), i32* %s)\n", ir)
 		break
 	case global.DOUBLE_LITERAL:
 		fmt.Printf("call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.scan.double, i32 0, i32 0), double* %s)\n", ir)
 		break
 	case global.CHAR_LITERAL:
-		p := ir + "_c"
-		fmt.Printf("call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.scan, i32 0, i32 0), i8* %s)\n", p)
+		//p := ir + "_c"
+		fmt.Printf("call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.scan, i32 0, i32 0), i8* %s)\n", ir)
 		break
 	default:
 		break

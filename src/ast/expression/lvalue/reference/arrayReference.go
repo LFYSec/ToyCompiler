@@ -74,7 +74,5 @@ func CreateArrayReference(array *symbolTable.Symbol, index rvalue.RValue) ArrayR
 	rvalue.NextTmpReg++
 	result.LvRegId = rvalue.NextTmpReg
 	result.Type = array.Type
-	//result.Type = array.Type
-	//result.Array.Type = global.ARRAY
 	return result
 }

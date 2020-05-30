@@ -1,6 +1,7 @@
 package init
 
 import (
+	"Compiler/src/global"
 	"Compiler/src/symbolTable"
 	"bufio"
 	"fmt"
@@ -23,14 +24,21 @@ func Parse() {
 	fmt.Println(scanStr)
 
 	symbolTable.PushFrame()
-	//file, err := os.Open("1.l")
-	//if err != nil {
-	//	fmt.Println("read file err:", err)
-	//	return
-	//}
-	//defer file.Close()
-	//br := bufio.NewReader(file)
-	br := bufio.NewReader(os.Stdin)
+	var br *bufio.Reader
+	if global.DEBUG {
+		file, err := os.Open("recurse.l")
+		//file, err := os.Open("test/toylang_test/recurse.l")
+		if err != nil {
+			fmt.Println("read file err:", err)
+			return
+		}
+		defer file.Close()
+		br = bufio.NewReader(file)
+	} else {
+		br = bufio.NewReader(os.Stdin)
+	}
+
+
 	var s string
 	for {
 		line, err := br.ReadString('\n')

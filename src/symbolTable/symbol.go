@@ -9,7 +9,7 @@ type Symbol struct {
 	Type 			global.SymbolType
 	Mutable 		bool
 	Name			string
-	NamespaceId		int64
+	NamespaceId		int
 	Size			int
 }
 
