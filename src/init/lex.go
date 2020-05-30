@@ -57,26 +57,27 @@ func (l *lex) Lex(yylval *yySymType) int {
 		yylval.symbolType = VOID
 		return TYPE
 	case C.IF:
-		//fmt.Println("if")
 		return IF
 	case C.ELSE:
-		//fmt.Println("else")
 		return ELSE
 	case C.WHILE:
-		//fmt.Println("while")
 		return WHILE
 	case C.RETURN:
-		//fmt.Println("while")
 		return RETURN
 	case C.PRINT:
-		//fmt.Println("print")
 		return PRINT
+	case C.SCAN:
+		return SCAN
 	case C.INT_LITERAL:
 		yylval.int_value, _ = strconv.Atoi(l.yytext)
 		return INT_LITERAL
 	case C.DOUBLE_LITERAL:
 		yylval.double_value, _ = strconv.ParseFloat(l.yytext, 64)
 		return DOUBLE_LITERAL
+	case C.CHAR_LITERAL:
+		tmp := []rune(l.yytext[1:len(l.yytext)-1])
+		yylval.char_value = uint8(tmp[0])
+		return CHAR_LITERAL
 	case C.IDENTIFY:
 		yylval.string_value = l.yytext
 		return IDENTIFY

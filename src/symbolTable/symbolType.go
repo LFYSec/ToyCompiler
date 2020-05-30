@@ -18,6 +18,8 @@ func TypeString(t global.SymbolType) string {
 		return "double"
 	case global.DOUBLE_LITERAL:
 		return "double"
+	case global.CHAR_LITERAL:
+		return "i8"
 	default:
 		return ""
 	}

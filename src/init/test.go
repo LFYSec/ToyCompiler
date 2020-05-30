@@ -49,7 +49,9 @@ package init
 //}
 
 func test() {
-
+	//var x uint8
+	//y,_ := strconv.ParseUint("a", 10, 8)
+	//x = uint8(y)
 	//stmt.CreateAssignStmt()
 	//stmt.Stmt
 	//function.CreateFuncDefine()

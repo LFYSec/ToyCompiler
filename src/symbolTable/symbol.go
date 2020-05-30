@@ -19,7 +19,7 @@ type FuncSymbol struct {
 	ArgsType 		map[string]global.SymbolType
 }
 
-func TypeName(symbol *Symbol) string { //  TODO distinguish TypeName and TypeString
+func TypeName(symbol *Symbol) string {
 	if symbol.Size > 0 {
 		result := fmt.Sprintf("[%d x %s]", symbol.Size, TypeString(symbol.Type))
 		return result
@@ -29,6 +29,8 @@ func TypeName(symbol *Symbol) string { //  TODO distinguish TypeName and TypeStr
 		return "i32"
 	case global.DOUBLE_LITERAL:
 		return "double"
+	case global.CHAR_LITERAL:
+		return "i8"
 	default:
 		panic("[*]Error: Unknown type")
 	}
@@ -44,10 +46,13 @@ func CreateSymbol(mutable bool, t global.SymbolType, name string, size int) *Sym
 		t = global.DOUBLE_LITERAL
 	} else if t == global.BOOL {
 		t = global.BOOL
+	} else if t == global.CHAR {
+		t = global.CHAR_LITERAL
 	}
+
 	result.Type = t
-	//result.NamespaceId = 2^64 - 1  // TODO Question?
-	result.NamespaceId = 0  // TODO Question?
+	//result.NamespaceId = 2^64 - 1
+	result.NamespaceId = 0
 	result.Size = size
 	return &result
 }

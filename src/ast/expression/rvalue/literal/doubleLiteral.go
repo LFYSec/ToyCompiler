@@ -1,4 +1,4 @@
-package doubleLiteral
+package literal
 
 import (
 	"Compiler/src/ast/expression/rvalue"

@@ -21,6 +21,11 @@ func (p PrintStmt) GeneCode() {
 	case global.DOUBLE_LITERAL:
 		fmt.Printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.double, i32 0, i32 0), double %s)\n", ir)
 		break
+	case global.CHAR_LITERAL:
+		p := ir + "_c"
+		fmt.Printf("%s = sext i8 %s to i32\n", p, ir)
+		fmt.Printf("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str, i32 0, i32 0), i32 %s)\n", p)
+		break
 	default:
 		break
 	}

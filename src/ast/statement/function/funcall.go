@@ -4,7 +4,7 @@ import (
 	"Compiler/src/ast/expression/lvalue"
 	"Compiler/src/ast/expression/lvalue/reference"
 	"Compiler/src/ast/expression/rvalue"
-	"Compiler/src/ast/expression/rvalue/intLiteral"
+	"Compiler/src/ast/expression/rvalue/literal"
 	stmt "Compiler/src/ast/statement"
 	st "Compiler/src/symbolTable"
 	"fmt"
@@ -33,8 +33,8 @@ func (f Funcall) GeneCode() {
 		//	arg := i.(intLiteral.IntLiteral)
 		//	funcArgs += fmt.Sprintf(argFormat, st.TypeString(arg.Type), strconv.Itoa(arg.Value))
 		//}
-		case intLiteral.IntLiteral:
-			arg := i.(intLiteral.IntLiteral)
+		case literal.IntLiteral:
+			arg := i.(literal.IntLiteral)
 			funcArgs += fmt.Sprintf(argFormat, st.TypeString(arg.Type), strconv.Itoa(arg.Value))
 		}
 	}

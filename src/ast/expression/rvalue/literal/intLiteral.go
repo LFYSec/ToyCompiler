@@ -1,4 +1,4 @@
-package intLiteral
+package literal
 
 import (
 	"Compiler/src/ast/expression/rvalue"

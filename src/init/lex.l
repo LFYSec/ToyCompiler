@@ -17,10 +17,12 @@
 "else"                      {return ELSE;}
 "while"                     {return WHILE;}
 "print"                     {return PRINT;}
+"scan"                      {return SCAN;}
 "return"                    {return RETURN;}
 ([-])?[0-9]+                {return INT_LITERAL;}
 ([-])?[0-9]+\.[0-9]*        {return DOUBLE_LITERAL;}
 [a-zA-Z][0-9a-zA-Z_]*       {return IDENTIFY;}
+\"(\\.|[^"])\"              {return CHAR_LITERAL;}
 "=="                        {return EQ;}
 "!="                        {return NE;}
 "<"                         {return LT;}

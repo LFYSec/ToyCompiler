@@ -26,7 +26,7 @@ func (c CharLiteral) GetType() global.SymbolType {
 	return c.Type
 }
 
-func CreateStrLiteral(value uint8) CharLiteral {
+func CreateCharLiteral(value uint8) CharLiteral {
 	var charLiteral CharLiteral
 	charLiteral.Value = value
 	charLiteral.Type = global.CHAR_LITERAL

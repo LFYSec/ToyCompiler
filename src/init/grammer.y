@@ -7,8 +7,7 @@ import (
 	"Compiler/src/ast"
 	"Compiler/src/global"
 	"Compiler/src/ast/expression/lvalue/reference"
-	"Compiler/src/ast/expression/rvalue/doubleLiteral"
-	"Compiler/src/ast/expression/rvalue/intLiteral"
+	"Compiler/src/ast/expression/rvalue/literal"
 	"Compiler/src/ast/expression/rvalue/binOperateResult"
 	"Compiler/src/ast/statement/function"
 	"Compiler/src/ast/statement/function"
@@ -26,6 +25,7 @@ var result *stmt.CompoundStmt
 	int_value 	int
 	double_value 	float64
 	string_value 	string
+	char_value	uint8
    	node 		ast.Node
    	symbolType 	global.SymbolType
 }
@@ -34,11 +34,12 @@ var result *stmt.CompoundStmt
 %token <string_value> 	IDENTIFY
 %token <int_value> 	INT_LITERAL
 %token <double_value> 	DOUBLE_LITERAL
+%token <char_value> 	CHAR_LITERAL
 %token ARRAY
 
 %token <string_value> STRING INT DOUBLE CHAR BOOL VOID
 
-%token IF ELSE WHILE FOR PRINT EOL RETURN EOS
+%token IF ELSE WHILE FOR PRINT EOL RETURN EOS SCAN
 
 %token <string_value> EQ NE LT LE GT GE ASSIGN COMMA
 %token <string_value> ADD SUB MUL DIV NOT
@@ -50,9 +51,8 @@ var result *stmt.CompoundStmt
 
 %type <node> expression statement program assign block stmtList defargs callargs
 %type <node> atomExpression binaryOrAtomExpression refExpression
-%type <node> assignStatement printStatement declareStatement whileStatement
+%type <node> assignStatement printStatement declareStatement whileStatement scanStatement
 %type <node> returnStatement funcDefineStmt funCallStmt assignFunCallStmt ifStatement
-//%type <string_value> unaryOperator
 
 
 %%
@@ -83,7 +83,7 @@ declareStatement
 		a := stmt.CreateAssignStmt(ref, v)
 		$$ = stmt.CreateDeclareStmt(s, a)
         }
-        // TODO array每个元素当成一个变量存，然后整个array通过同一个array_name的符号表来找
+        // array每个元素当成一个变量存，然后整个array通过同一个array_name的符号表来找
         | TYPE IDENTIFY LBRACKET INT_LITERAL RBRACKET EOS {
 		s := symbolTable.CreateSymbol(true, $1, $2, $4)
 		symbolTable.AddSymbol(s)
@@ -112,6 +112,13 @@ printStatement
     	}
 	;
 
+scanStatement
+	: SCAN LPARENTHESIS expression RPARENTHESIS EOS {
+		v3 := ($3).(rvalue.RValue)
+		$$ = stmt.CreateScanStmt(v3)
+    	}
+	;
+
 ifStatement
 	: IF expression block {
 		symbolTable.PushFrame()
@@ -128,6 +135,7 @@ ifStatement
 		$$ = stmt.CreateIfStmt(v2, v3, v5)
 		symbolTable.PopFrame()
 	}
+	;
 
 whileStatement
 	: WHILE expression block {
@@ -157,21 +165,25 @@ statement
 	| funCallStmt
 	| assignFunCallStmt
 	| ifStatement
+	| scanStatement
 	;
 
 
 atomExpression
 	: INT_LITERAL {
-		$$ = intLiteral.CreateIntLiteral($1)
+		$$ = literal.CreateIntLiteral($1)
     	}
     	| DOUBLE_LITERAL {
-		$$ = doubleLiteral.CreateDoubleLiteral($1)
+		$$ = literal.CreateDoubleLiteral($1)
     	}
     	| refExpression {
     		$$=$1
     	}
     	| LPARENTHESIS expression RPARENTHESIS {
     		$$=$2
+    	}
+    	| CHAR_LITERAL {
+    		$$ = literal.CreateCharLiteral($1)
     	}
     	;
 
@@ -300,6 +312,7 @@ assignFunCallStmt
 		v4 := ($4).(stmt.Stmt)
 		$$ = function.CreateAssignFunCallStmt(ref, v4)
     	}
+    	;
 
 // args处返回CreateDeclareStmt切片，block处返回函数的CompoundStmt
 funcDefineStmt

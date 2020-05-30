@@ -2,5 +2,11 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/clangtest/opt/llvm-cookbook" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/clangtest/opt/llvm-pass-tutorial" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test/clangtest/llvm-cookbook" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test/clangtest/llvm-pass-tutorial" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test/clangtest/opt/llvm-cookbook" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/test/clangtest/opt/llvm-pass-tutorial" vcs="Git" />
   </component>
 </project>

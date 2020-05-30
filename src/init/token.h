@@ -3,6 +3,7 @@ enum {
 
     IDENTIFY,
     INT_LITERAL,
+    CHAR_LITERAL,
     DOUBLE_LITERAL,
     EOL,
     EOS,
@@ -12,6 +13,7 @@ enum {
     WHILE,
     FOR,
     PRINT,
+    SCAN,
     RETURN,
 
     EQ,                      // ==
