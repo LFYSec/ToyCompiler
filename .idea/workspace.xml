@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ef038bf5-983e-4789-bdaa-ff6f6f64d0ee" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast/expression/lvalue/reference/arrayReference.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/lvalue/reference/arrayReference.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast/statement/function/funcall.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/function/funcall.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast/statement/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/scan.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/global/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/global/const.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/grammer.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/grammer.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init/y.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/y.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbol.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbol.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
