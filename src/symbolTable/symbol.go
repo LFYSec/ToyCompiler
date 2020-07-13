@@ -7,7 +7,6 @@ import (
 
 type Symbol struct {
 	Type 			global.SymbolType
-	Mutable 		bool
 	Name			string
 	NamespaceId		int
 	Size			int
@@ -38,7 +37,6 @@ func TypeName(symbol *Symbol) string {
 
 func CreateSymbol(mutable bool, t global.SymbolType, name string, size int) *Symbol {
 	var result Symbol
-	result.Mutable = mutable
 	result.Name = name
 	if t == global.INT {
 		t = global.INT_LITERAL

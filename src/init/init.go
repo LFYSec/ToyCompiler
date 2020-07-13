@@ -12,11 +12,11 @@ import (
 )
 
 func Parse() {
-	printStr := "@.str.double = private unnamed_addr constant [4 x i8] c\"%g\\0A\\00\", align 1\n" +
+	printStr := "@.str.double = private unnamed_addr constant [4 x i8] c\"%f\\0A\\00\", align 1\n" +
 		"@.str.int = private unnamed_addr constant [4 x i8] c\"%d\\0A\\00\", align 1\n" +
 		"@.str = private unnamed_addr constant [4 x i8] c\"%c\\0A\\00\", align 1\n"
 	// TODO generate format string auto
-	scanStr := "@.scan.double = private unnamed_addr constant [3 x i8] c\"%g\\00\", align 1\n" +
+	scanStr := "@.scan.double = private unnamed_addr constant [4 x i8] c\"%lf\\00\", align 1\n" +
 		"@.scan.int = private unnamed_addr constant [3 x i8] c\"%d\\00\", align 1\n" +
 		"@.scan = private unnamed_addr constant [3 x i8] c\"%c\\00\", align 1\n"
 
@@ -26,8 +26,8 @@ func Parse() {
 	symbolTable.PushFrame()
 	var br *bufio.Reader
 	if global.DEBUG {
-		file, err := os.Open("recurse.l")
-		//file, err := os.Open("test/toylang_test/recurse.l")
+		file, err := os.Open("expr.l")
+		//file, err := os.Open("test/toylang_test/expr.l")
 		if err != nil {
 			fmt.Println("read file err:", err)
 			return

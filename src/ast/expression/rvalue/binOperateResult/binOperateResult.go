@@ -1,11 +1,12 @@
 package binOperateResult
 
 import (
+	"Compiler/src/ast/expression/lvalue/reference"
 	"Compiler/src/ast/expression/rvalue"
+	"Compiler/src/ast/expression/rvalue/literal"
 	"Compiler/src/global"
 	"Compiler/src/symbolTable"
 	"fmt"
-	"os"
 )
 
 
@@ -47,9 +48,9 @@ func (b BinOperateResult) GeneRVCode() {
 		break
 	case global.DIV:
 		if b.Type == global.DOUBLE_LITERAL {
-			fmt.Print("fdif")
+			fmt.Print("fdiv")
 		} else {
-			fmt.Print("dif nsw")
+			fmt.Print("sdiv")
 		}
 		break
 	case global.GT:
@@ -119,9 +120,16 @@ func (b BinOperateResult) GeneRVCode() {
 			break
 		}
 	default:
-		os.Exit(1)
+		panic("unknown op")
 	}
 	fmt.Printf(" %s ", symbolTable.TypeString(b.Type))
+	//if symbolTable.TypeString(b.Type) == "double" {
+	//	ir, _ := strconv.ParseFloat(b.RHS.RvalueIR(),64)
+	//	IRS := strconv.FormatFloat(ir,'f',-1,64)
+	//	fmt.Printf("%s, %s\n", b.LHS.RvalueIR(), IRS)
+	//} else {
+	//	fmt.Printf("%s, %s\n", b.LHS.RvalueIR(), b.RHS.RvalueIR())
+	//}
 	fmt.Printf("%s, %s\n", b.LHS.RvalueIR(), b.RHS.RvalueIR())
 }
 
@@ -137,22 +145,27 @@ func (b BinOperateResult) GetType() global.SymbolType {
 
 func CreateBinOperateResult(OperateId int, LHS,RHS rvalue.RValue) BinOperateResult {
 	var result BinOperateResult
+	var NRHS literal.DoubleLiteral
 	if LHS.GetType() != RHS.GetType() {
-		os.Exit(1)
+		x := LHS.(reference.VariableReference)
+		if x.Type == global.DOUBLE_LITERAL {
+			switch RHS.(type) {
+			case literal.IntLiteral:
+				tmp := RHS.(literal.IntLiteral)
+				NRHS.Type = global.DOUBLE_LITERAL
+				NRHS.Value = float64(tmp.Value)
+				result.RHS = NRHS
+			default:
+				panic("operator type not match")
+			}
+		}
+	} else {
+		result.RHS = RHS // 避免double a = b - 1;
 	}
-	//switch OperateId {
-	//case global.GT:
-	//case global.LT:
-	//	result.Type = global.BOOL
-	//	break
-	//default:
-	//	result.Type = LHS.GetType()
-	//	break
-	//}
 	result.Type = LHS.GetType()
 	result.OperatorId = OperateId
 	result.LHS = LHS
-	result.RHS = RHS
+
 	rvalue.NextTmpReg++
 	result.TmpRegId = rvalue.NextTmpReg
 	return result

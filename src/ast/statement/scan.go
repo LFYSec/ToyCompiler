@@ -22,7 +22,7 @@ func (s ScanStmt) GeneCode() {
 		fmt.Printf("call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.scan.int, i32 0, i32 0), i32* %s)\n", ir)
 		break
 	case global.DOUBLE_LITERAL:
-		fmt.Printf("call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.scan.double, i32 0, i32 0), double* %s)\n", ir)
+		fmt.Printf("call i32 (i8*, ...) @scanf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.scan.double, i32 0, i32 0), double* %s)\n", ir)
 		break
 	case global.CHAR_LITERAL:
 		//p := ir + "_c"

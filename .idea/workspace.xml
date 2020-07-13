@@ -2,7 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef038bf5-983e-4789-bdaa-ff6f6f64d0ee" name="默认更改列表" comment="">
+      <change afterPath="$PROJECT_DIR$/test/toylang_test/expr.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/lfy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/lfy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/statement/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/statement/scan.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/global/const.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/grammer.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/grammer.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init/y.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/init/y.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/symbolTable/symbol.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/symbolTable/symbol.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/common_test/1.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/common_test/1.l" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/common_test/1.ll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ssa_test/1.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ssa_test/1.ll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ssa_test/adce.bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ssa_test/cse.bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ssa_test/my.bc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/toylang_test/Compiler" beforeDir="false" afterPath="$PROJECT_DIR$/test/toylang_test/Compiler" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/toylang_test/while.l" beforeDir="false" afterPath="$PROJECT_DIR$/test/toylang_test/arr_while.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/toylang_test/while.ll" beforeDir="false" afterPath="$PROJECT_DIR$/test/toylang_test/arr_while.ll" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,11 +142,6 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go</url>
-          <line>142</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/ast/expression/rvalue/literal/charLiteral.go</url>
           <line>29</line>
           <option name="timeStamp" value="64" />
@@ -145,15 +161,35 @@
           <line>71</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/init/lex.go</url>
+          <line>74</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go</url>
+          <line>156</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/ast/expression/rvalue/binOperateResult/binOperateResult.go</url>
+          <line>164</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/ast/expression/rvalue/literal/doubleLiteral.go</url>
+          <line>19</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/symbolTable/symbol.go</url>
+          <line>23</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="DlvErrorBreakpoint" />
       </default-breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="GoApplicationRunConfiguration">
-        <watch expression="GlobalSymbolTableStack" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

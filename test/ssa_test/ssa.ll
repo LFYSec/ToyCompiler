@@ -1,5 +1,5 @@
-; ModuleID = '1.c'
-source_filename = "1.c"
+; ModuleID = 'ssa.c'
+source_filename = "ssa.c"
 target datalayout = "e-m:o-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-apple-macosx10.14.0"
 
@@ -11,30 +11,25 @@ define i32 @main() #0 {
   %2 = alloca i32, align 4
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
-  %5 = alloca i32, align 4
-  %6 = alloca i32, align 4
   store i32 0, i32* %1, align 4
   store i32 1, i32* %2, align 4
-  store i32 2, i32* %4, align 4
-  %7 = load i32, i32* %4, align 4
-  store i32 %7, i32* %5, align 4
-  %8 = load i32, i32* %2, align 4
-  %9 = icmp eq i32 %8, 1
-  br i1 %9, label %10, label %11
+  %5 = load i32, i32* %2, align 4
+  %6 = icmp eq i32 %5, 1
+  br i1 %6, label %7, label %8
 
-; <label>:10:                                     ; preds = %0
+; <label>:7:                                      ; preds = %0
   store i32 2, i32* %3, align 4
-  br label %12
+  br label %9
 
-; <label>:11:                                     ; preds = %0
+; <label>:8:                                      ; preds = %0
   store i32 3, i32* %3, align 4
-  br label %12
+  br label %9
 
-; <label>:12:                                     ; preds = %11, %10
-  %13 = load i32, i32* %3, align 4
-  store i32 %13, i32* %6, align 4
-  %14 = load i32, i32* %6, align 4
-  %15 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str, i32 0, i32 0), i32 %14)
+; <label>:9:                                      ; preds = %8, %7
+  %10 = load i32, i32* %3, align 4
+  store i32 %10, i32* %4, align 4
+  %11 = load i32, i32* %4, align 4
+  %12 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str, i32 0, i32 0), i32 %11)
   ret i32 0
 }
 

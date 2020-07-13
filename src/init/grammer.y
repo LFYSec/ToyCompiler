@@ -10,7 +10,6 @@ import (
 	"Compiler/src/ast/expression/rvalue/literal"
 	"Compiler/src/ast/expression/rvalue/binOperateResult"
 	"Compiler/src/ast/statement/function"
-	"Compiler/src/ast/statement/function"
 	"Compiler/src/symbolTable"
 	"Compiler/src/ast/expression/lvalue"
 	"Compiler/src/ast/expression/rvalue"
@@ -302,6 +301,9 @@ funCallStmt
 		} else {
 			$$ = function.CreateFuncCallStmt(v1, nil)
 		}
+	}
+	| funCallStmt EOS {
+		$$ = $1
 	}
 	;
 

@@ -2,7 +2,7 @@ package global
 
 type SymbolType int
 
-const DEBUG  = true
+const DEBUG  = false
 
 const TYPE = 57346
 const IDENTIFY = 57347
